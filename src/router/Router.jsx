@@ -2,7 +2,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '@pages/Home';
 import Layout from '@/components/layout/Layout';
 import { PATH } from '@/constants/path-constant';
-const { LOGIN, SIGN_UP } = PATH;
+import BookMark from '@/pages/BookMark';
+const { LOGIN, SIGN_UP, BOOK_MARK } = PATH;
 export default function Router() {
   return (
     <BrowserRouter>
@@ -13,6 +14,7 @@ export default function Router() {
           <Route path={LOGIN} element={<div>login</div>} />
           {/*  //TODO: 회원가입 페이지 연결해 주세요 */}
           <Route path={SIGN_UP} element={<div>회원가입</div>} />
+          <Route path={BOOK_MARK} element={<BookMark />} />
         </Route>
       </Routes>
     </BrowserRouter>
