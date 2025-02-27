@@ -11,6 +11,7 @@ const HotplaceList = () => {
     <div className='m-3'>
       {isVisible && (
         <div className='overflow-y-auto max-height-[400px] mb-[80px]'>
+          {/* 카드 start */}
           <div className='border-2 w-[40%] p-3 mb-3 bg-neutral-50'>
             <div className='flex gap-4 items-center'>
               <div className='text-orange-400 text-[23px]'>양복점 용산점</div>
@@ -35,6 +36,7 @@ const HotplaceList = () => {
               이 핫플 유튜브 보기
             </button>
           </div>
+          {/* 카드 end */}
           <div className='border-2 w-[40%] p-3 mb-3 bg-neutral-50'>
             <div className='flex gap-4 items-center'>
               <div className='text-orange-400 text-[23px]'>양복점 용산점</div>
