@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { signUpValidate } from '@utils/signUpValidate';
 import supabase from '@api/supabaseAPI';
 
-export default useSignUp = () => {
+export default function useSignUp() {
   const [signUpFormData, setSignUpFormData] = useState({
     email: '',
     password: '',
@@ -86,4 +87,4 @@ export default useSignUp = () => {
     signUpChangeHandler,
     checkDuplicate,
   };
-};
+}
