@@ -13,6 +13,9 @@ export default {
         accent: '#fb923c',
         'accent-active': '#ea580c',
       },
+      fontFamily: {
+        gugi: ['Gugi', 'sans-serif'],
+      },
     },
   },
   plugins: [],
