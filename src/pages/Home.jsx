@@ -1,7 +1,3 @@
 export default function Home() {
-  return (
-    <>
-      <div className=''>홈</div>
-    </>
-  );
+  return <div className='bg-point'>홈</div>;
 }
