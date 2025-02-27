@@ -60,7 +60,7 @@ export default function SignUpForm() {
             checkDuplicate('nickname');
           }}
         >
-          중복체크
+          유효성 검증
         </button>
       </div>
       {errorMessage.nickname}
