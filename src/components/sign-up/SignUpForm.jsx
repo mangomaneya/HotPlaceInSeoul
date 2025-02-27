@@ -1,21 +1,31 @@
 import useSignUp from '@hooks/useSignUp';
 import InputForm from '@components/sign-up/InputForm';
 
-const SignUpForm = () => {
+export default function SignUpForm() {
   const { signUpFormData, errorMessage, isDuplicateChecked, signUpSubmitHandler, signUpChangeHandler, checkDuplicate } =
     useSignUp();
 
   return (
-    <div className='flex flex-col'>
-      <InputForm
-        className=''
-        labelName='이메일'
-        name='email'
-        type='text'
-        placeholder='이메일을 입력해주세요'
-        value={signUpFormData.email}
-        onChange={signUpChangeHandler}
-      />
+    <form onSubmit={signUpSubmitHandler} className='flex flex-col'>
+      <div>
+        <InputForm
+          className=''
+          labelName='이메일'
+          name='email'
+          type='text'
+          placeholder='이메일을 입력해주세요'
+          value={signUpFormData.email}
+          onChange={signUpChangeHandler}
+        />
+        <button
+          type='button'
+          onClick={() => {
+            checkDuplicate('email');
+          }}
+        >
+          중복체크
+        </button>
+      </div>
       <InputForm
         className=''
         labelName='비밀번호'
@@ -34,17 +44,27 @@ const SignUpForm = () => {
         value={signUpFormData.confirmPassword}
         onChange={signUpChangeHandler}
       />
-      <InputForm
-        labelName='닉네임'
-        name='nickname'
-        type='text'
-        placeholder='닉네임을 입력해주세요'
-        className=''
-        value={signUpFormData.nickname}
-        onChange={signUpChangeHandler}
-      />
-    </div>
+      <div>
+        <InputForm
+          labelName='닉네임'
+          name='nickname'
+          type='text'
+          placeholder='닉네임을 입력해주세요'
+          className=''
+          value={signUpFormData.nickname}
+          onChange={signUpChangeHandler}
+        />
+        <button
+          type='button'
+          onClick={() => {
+            checkDuplicate('nickname');
+          }}
+        >
+          중복체크
+        </button>
+      </div>
+      {errorMessage.nickname}
+      <button type='submit'>회원가입</button>
+    </form>
   );
-};
-
-export default SignUpForm;
+}

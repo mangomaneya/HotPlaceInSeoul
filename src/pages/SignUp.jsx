@@ -1,12 +1,12 @@
 import SignUpForm from '@/components/sign-up/SignUpForm';
 
-const SignUp = () => {
+export default function SignUp() {
   return (
     <div>
       Signup
       <SignUpForm />
     </div>
   );
-};
+}
 
-export default SignUp;
+SignUp;

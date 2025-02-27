@@ -39,6 +39,8 @@ export default function useSignUp() {
   }
 
   async function checkDuplicate(type) {
+    console.log(isDuplicateChecked.email);
+    console.log(isDuplicateChecked.nickname);
     if (type === 'email') {
       if (errorMessage.email !== errorMessageText.DUPLICATED) return;
 
