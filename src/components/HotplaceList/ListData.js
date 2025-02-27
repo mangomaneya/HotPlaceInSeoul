@@ -34,4 +34,32 @@ export const ListData = [
     adress: '서울 종로구 삼일대로30길 12',
     number: '02-2266-7052',
   },
+  {
+    id: 6,
+    name: '낙원떡집',
+    category: '떡, 한과',
+    adress: '서울 종로구 삼일대로 438',
+    number: '02-732-5579',
+  },
+  {
+    id: 7,
+    name: '인사동종가집',
+    category: '한식',
+    adress: '서울 종로구 인사동길 15-13 종가집',
+    number: '02-733-2135',
+  },
+  {
+    id: 8,
+    name: '호반',
+    category: '한식',
+    adress: '서울 종로구 삼일대로26길 20',
+    number: '02-745-6618',
+  },
+  {
+    id: 9,
+    name: '엄용백 돼지국밥',
+    category: '국밥',
+    adress: '서울 종로구 인사동3길 20',
+    number: '0507-1342-8092',
+  },
 ];
