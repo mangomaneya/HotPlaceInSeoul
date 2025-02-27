@@ -8,7 +8,8 @@
       "@router/*": ["src/router/*"],
       "@data/*": ["src/data/*"],
       "@utils/*": ["src/lib/utils/*"],
-      "@api/*": ["src/lib/api/*"]
+      "@api/*": ["src/lib/api/*"],
+      "@hooks/*": ["src/lib/hooks/*"]
     }
   }
 }
