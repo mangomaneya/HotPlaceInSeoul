@@ -1,34 +1,45 @@
-import supabase from '@/lib/api/supabaseAPI';
-import { useEffect } from 'react';
 import { useState } from 'react';
 import { Spacer } from './Spacer';
+import supabase from '@/lib/api/supabaseAPI';
+import { useQuery } from '@tanstack/react-query';
+
+const getHotplaces = async () => {
+  const { data, error } = await supabase.from('hotplaces').select('*');
+  if (error) {
+    throw new Error(error.message);
+  }
+  return data;
+};
+
 const HotplaceList = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [datas, setDatas] = useState([]);
 
   function toggleHotPlaceList() {
     setIsVisible((prev) => !prev);
   }
 
-  // hotplaces 테이블 정보 가져오기
-  useEffect(() => {
-    const ListData = async () => {
-      try {
-        const { data: hotplaces, error } = await supabase.from('hotplaces').select('*');
-        if (error) throw error;
-        setDatas(hotplaces);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    ListData();
-  }, []);
+  const {
+    data: hotplaces = [],
+    isPending,
+    isError,
+  } = useQuery({
+    queryKey: ['hotplaces'],
+    queryFn: getHotplaces,
+  });
+
+  if (isPending) {
+    return <div>로딩 중...</div>;
+  }
+
+  if (isError) {
+    return <div>에러가 발생했습니다.</div>;
+  }
 
   return (
-    <aside className='m-3'>
+    <aside className={`m-3 ${isVisible && 'bg-neutral-50 w-[250px]'}`}>
       {isVisible && (
         <div className='overflow-y-auto'>
-          {datas.map((data) => (
+          {hotplaces.map((data) => (
             <section key={data.id} className='border-2 w-[250px] p-3 mb-3 bg-neutral-50 cursor-pointer'>
               <div className='flex gap-4 items-center'>
                 <div className='text-orange-400 text-[23px]'>{data.name}</div>
@@ -42,8 +53,8 @@ const HotplaceList = () => {
           ))}
         </div>
       )}
-      <Spacer y={100} />
-      <button onClick={toggleHotPlaceList} className='p-2 w-[250px] fixed bottom-5 border-2 bg-neutral-50'>
+      <Spacer y={50} />
+      <button onClick={toggleHotPlaceList} className='fixed p-2 w-[250px] bg-button bottom-3 border-2  rounded-t-2xl'>
         {isVisible ? '핫플 닫기' : '핫플 보기'}
       </button>
     </aside>
