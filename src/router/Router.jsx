@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from '@components/layout/Layout';
-import { PATH } from '@/constants/path-constant';
+import { PATH } from '@constants/path-constant';
 import Home from '@pages/Home';
 import SignUp from '@pages/SignUp';
 import Login from '@pages/Login';
