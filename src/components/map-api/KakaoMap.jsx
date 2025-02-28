@@ -25,19 +25,42 @@ function KakaoMap() {
       const map = new kakao.maps.Map(mapContainer.current, options);
 
       positions.forEach((item) => {
+        const hotplaceMarkerImgSrc = '../../../public/hotplaceMarker.svg';
+        const hotplaceMarkerSize = new kakao.maps.Size(20, 40);
+        const hotplaceMarkerOption = { offset: new kakao.maps.Point(20, 40) };
+
+        const hotplaceMarker = new kakao.maps.MarkerImage(
+          hotplaceMarkerImgSrc,
+          hotplaceMarkerSize,
+          hotplaceMarkerOption
+        );
+
         const marker = new kakao.maps.Marker({
           map: map,
           position: new kakao.maps.LatLng(item.coord.lat, item.coord.lng),
-          title: item.name,
+          image: hotplaceMarker,
         });
 
-        const infoWindow = new kakao.maps.InfoWindow({
-          content: `${item.title}`,
+        const customInfoOverlay = new kakao.maps.CustomOverlay({
+          content: `${item.name}`,
           removable: true,
+          position: marker.getPosition(),
+          yAnchor: 2,
+          zIndex: 3,
         });
+        // const infoWindow = new kakao.maps.InfoWindow({
+        //   content: `${item.name}`,
+        //   removable: true,
+        //   width: 50,
+        //   height: 100,
+        // });
 
         kakao.maps.event.addListener(marker, 'click', function () {
-          infoWindow.open(map, marker);
+          if (customInfoOverlay.getMap()) {
+            customInfoOverlay.setMap(null);
+          } else {
+            customInfoOverlay.setMap(map);
+          }
         });
       });
     } else {
