@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from '@pages/Home';
-import Layout from '@/components/layout/Layout';
+import Layout from '@components/layout/Layout';
 import { PATH } from '@/constants/path-constant';
 import BookMark from '@/pages/BookMark/BookMark';
+import Home from '@/pages/Home';
 const { LOGIN, SIGN_UP, BOOK_MARK } = PATH;
 export default function Router() {
   return (
