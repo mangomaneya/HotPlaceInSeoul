@@ -71,7 +71,10 @@ export default function useSignUp() {
     e.preventDefault();
 
     if (!isValidForm()) {
-      openAlert({ type: ERROR, text: '잘못 입력된 정보가 있습니다. 다시 한 번 확인해주세요.' });
+      openAlert({
+        type: ERROR,
+        text: '잘못 입력된 정보가 있습니다! 다시 한 번 확인해주세요!',
+      });
       return;
     }
 
@@ -94,6 +97,7 @@ export default function useSignUp() {
     }
 
     //로그인 처리
+    openAlert({ type: SUCCESS, text: '회원가입을 완료했습니다. 자동으로 로그인됩니다.' });
     login(data.session.access_token, data.user.id, data.user.user_metadata.nickname);
     navigate('/');
   }
