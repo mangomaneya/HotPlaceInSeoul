@@ -1,31 +1,14 @@
 import { useState } from 'react';
 import { Spacer } from './Spacer';
-import supabase from '@/lib/api/supabaseAPI';
-import { useQuery } from '@tanstack/react-query';
-
-const getHotplaces = async () => {
-  const { data, error } = await supabase.from('hotplaces').select('*');
-  if (error) {
-    throw new Error(error.message);
-  }
-  return data;
-};
+import { useGetHotplaces } from '@/lib/queries/GetHotplaces';
 
 const HotplaceList = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { data: hotplaces = [], isPending, isError } = useGetHotplaces();
 
   function toggleHotPlaceList() {
     setIsVisible((prev) => !prev);
   }
-
-  const {
-    data: hotplaces = [],
-    isPending,
-    isError,
-  } = useQuery({
-    queryKey: ['hotplaces'],
-    queryFn: getHotplaces,
-  });
 
   if (isPending) {
     return <div>로딩 중...</div>;
