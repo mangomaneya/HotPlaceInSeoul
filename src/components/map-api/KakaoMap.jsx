@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-import { positions } from './boundary';
+// import { positions } from './boundary'; 마커 표시 임시 데이터터
 import supabase from '../../lib/api/supabaseAPI';
+import MapController from './MapController';
 function KakaoMap() {
-  const mapContainer = useRef(null);
+  const mapContainer = useRef(null); //지도 컨테이너
+  const map = useRef(null); // 지도 객체
   const [markerData, setMarkerData] = useState([]);
-  console.log(markerData);
+  const [mapCenter, setMapCenter] = useState({ lat: 37.5487477114048, lon: 127.04589900432654 });
+  //supabase의 데이터 호출부
   useEffect(() => {
     const handlemarkerData = async () => {
       const { data, error } = await supabase.from('hotplaces').select('*');
@@ -13,22 +16,24 @@ function KakaoMap() {
         console.log('supabase 데이터 호출 에러', error);
       } else {
         setMarkerData(data);
-        console.log(data);
+        // console.log(data);
       }
     };
     handlemarkerData();
   }, []);
+
+  //KakaoMap API 호출부
   useEffect(() => {
-    //supabase의 데이터 호출부
     if (window.kakao && window.kakao.maps) {
       const { kakao } = window;
+      //API 호출 시 window.kakao를 받는다
 
       const options = {
-        center: new window.kakao.maps.LatLng(37.52375220020471, 126.98016344995719),
-        level: 8,
+        center: new kakao.maps.LatLng(mapCenter.lat, mapCenter.lon),
+        level: 5,
       };
       const map = new kakao.maps.Map(mapContainer.current, options);
-
+      //지도생성
       markerData.forEach((item) => {
         const name = item.name;
         const lat = parseFloat(item.latitude);
@@ -70,8 +75,20 @@ function KakaoMap() {
     } else {
       console.error('카카오맵 API가 로드되지 않았습니다.');
     }
-  }, [markerData]);
-  return <div id='map' ref={mapContainer} className='w-full h-full'></div>;
+  }, [markerData, mapCenter]);
+  const handlePlaceSelect = (lat, lon) => {
+    setMapCenter({ lat, lon });
+  };
+  return (
+    <>
+      <div className='flex w-3/4 h-[50px] mx-auto bg-lime-300'>
+        <MapController handlePlaceSelect={handlePlaceSelect} />
+      </div>
+      <div className=' bg-point flex   items-center justify-center  w-3/4 h-[480px] rounded-sm border border-solid border-[3px] border-black mx-auto'>
+        <div id='map' ref={mapContainer} className='w-full h-full'></div>
+      </div>
+    </>
+  );
 }
 
 export default KakaoMap;
