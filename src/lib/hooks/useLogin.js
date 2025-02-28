@@ -20,10 +20,12 @@ export default function useLogin() {
 
   async function loginSubmitHandler(e) {
     e.preventDefault();
-    const { error } = await supabase.auth.signInWithPassword(loginState);
+    const { data, error } = await supabase.auth.signInWithPassword(loginState);
     if (error) return setLoginErrorMessage('아이디와 비밀번호가 일치하지 않습니다!');
 
+    console.log(data);
     const { login } = useAuthStore;
+
     return navigate(redirectPath);
   }
 
