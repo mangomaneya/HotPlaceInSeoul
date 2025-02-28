@@ -11,6 +11,7 @@ export default {
         point: '#bef264',
         'point-active': '#65a30d',
         button: '#e5e5e5',
+        input: '#e5e5e5',
         accent: '#fb923c',
         'accent-active': '#ea580c',
       },
