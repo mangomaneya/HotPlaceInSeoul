@@ -1,5 +1,5 @@
 import useSignUp from '@hooks/useSignUp';
-import InputForm from '@components/sign-up/InputForm';
+import InputForm from '@components/common/InputForm';
 
 export default function SignUpForm() {
   const { signUpFormData, errorMessage, isDuplicateChecked, signUpSubmitHandler, signUpChangeHandler, checkDuplicate } =
