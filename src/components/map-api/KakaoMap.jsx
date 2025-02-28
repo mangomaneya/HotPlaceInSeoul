@@ -20,7 +20,7 @@ function KakaoMap() {
 
       const options = {
         center: new window.kakao.maps.LatLng(37.52375220020471, 126.98016344995719),
-        level: 3,
+        level: 8,
       };
       const map = new kakao.maps.Map(mapContainer.current, options);
 
@@ -28,7 +28,7 @@ function KakaoMap() {
         const marker = new kakao.maps.Marker({
           map: map,
           position: new kakao.maps.LatLng(item.coord.lat, item.coord.lng),
-          name: item.name,
+          title: item.name,
         });
 
         const infoWindow = new kakao.maps.InfoWindow({
@@ -46,8 +46,7 @@ function KakaoMap() {
   }, []);
   return (
     <div className='flex flex-col items-center justify-center bg-[#f5f5f5] w-full h-full'>
-      {/* <h2 className='text-2xl font-semibold '>카카오맵 지도</h2> */}
-      <div id='map' ref={mapContainer} className='w-full h-[480px]'></div>
+      <div id='map' ref={mapContainer} className='w-10/12 h-[480px]'></div>
     </div>
   );
 }
