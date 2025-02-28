@@ -1,8 +1,10 @@
-import InputForm from '@components/sign-up/InputForm';
+import useLogin from '@hooks/useLogin';
+import InputForm from '@components/common/InputForm';
 
 const LoginForm = () => {
+  const { loginState, loginErrorMessage, loginChangeHandler, loginSubmitHandler } = useLogin();
   return (
-    <form onSubmit={signUpSubmitHandler} className='flex flex-col w-[350px] px-[5px]'>
+    <form onSubmit={loginSubmitHandler} className='flex flex-col w-[350px] px-[5px]'>
       <div className='mb-[10px]'>
         <InputForm
           className='px-[5px] py-[5px] '
@@ -10,8 +12,8 @@ const LoginForm = () => {
           name='email'
           type='text'
           placeholder='이메일을 입력해주세요'
-          value={signUpFormData.nickname}
-          onChange={signUpChangeHandler}
+          value={loginState.email}
+          onChange={loginChangeHandler}
         />
       </div>
       <div className='mb-[10px]'>
@@ -21,10 +23,10 @@ const LoginForm = () => {
           name='password'
           type='password'
           placeholder='비밀번호를 입력해주세요'
-          value={signUpFormData.nickname}
-          onChange={signUpChangeHandler}
+          value={loginState.password}
+          onChange={loginChangeHandler}
         />
-        <p className='text-sm text-red-500'>{errorMessage.nickname}</p>
+        <p className='text-sm text-red-500'>{loginErrorMessage}</p>
       </div>
       <button
         type='submit'
