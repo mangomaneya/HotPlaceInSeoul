@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import supabase from '@api/supabaseAPI';
+import useAuthStore from '@store/zustand/authStore';
 
 export default function useLogin() {
   const [loginState, setLoginState] = useState({ email: '', password: '' });
@@ -21,6 +22,8 @@ export default function useLogin() {
     e.preventDefault();
     const { error } = await supabase.auth.signInWithPassword(loginState);
     if (error) return setLoginErrorMessage('아이디와 비밀번호가 일치하지 않습니다!');
+
+    const { login } = useAuthStore;
     return navigate(redirectPath);
   }
 
