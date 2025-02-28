@@ -20,7 +20,7 @@ export default function SignUpForm() {
           />
           <button
             type='button'
-            className='border rounded-md px-[5px] h-[35px]'
+            className='border rounded-md px-[5px] h-[35px] w-[80px] bg-button text-text-primary hover:bg-point-active hover:text-text-light transition duration-300'
             onClick={() => {
               checkDuplicate('email');
             }}
@@ -70,7 +70,7 @@ export default function SignUpForm() {
       </div>
       <button
         type='submit'
-        className='w-full h-[40px] border rounded-md bg-neutral-200 hover:bg-point-active hover:text-white transition duration-300  '
+        className='w-full h-[40px] border rounded-md bg-button text-text-primary hover:bg-point-active hover:text-text-light transition duration-300'
       >
         회원가입
       </button>
