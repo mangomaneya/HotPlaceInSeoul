@@ -6,6 +6,7 @@ import useAuthStore from '@store/zustand/authStore';
 export default function useLogin() {
   const [loginState, setLoginState] = useState({ email: '', password: '' });
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
+  const login = useAuthStore((state) => state.login);
 
   const redirectedFrom = useLocation()?.state?.redirectedFrom || '/';
   const navigate = useNavigate();
@@ -23,8 +24,8 @@ export default function useLogin() {
     const { data, error } = await supabase.auth.signInWithPassword(loginState);
     if (error) return setLoginErrorMessage('아이디와 비밀번호가 일치하지 않습니다!');
 
-    console.log(data);
-    const { login } = useAuthStore;
+    //로그인 처리
+    login(data.session.access_token, data.user.id, data.user.user_metadata.nickname);
 
     return navigate(redirectPath);
   }

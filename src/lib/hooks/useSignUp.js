@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signUpValidate } from '@utils/signUpValidate';
 import supabase from '@api/supabaseAPI';
+import useAuthStore from '@store/zustand/authStore';
 
 const errorMessageText = {
   DUPLICATED: '중복 체크를 해주세요.',
@@ -26,6 +27,7 @@ export default function useSignUp() {
   });
 
   const [isDuplicateChecked, setIsDuplicateChecked] = useState({ email: false });
+  const login = useAuthStore((state) => state.login);
   const navigate = useNavigate();
 
   function signUpChangeHandler(e) {
@@ -82,8 +84,6 @@ export default function useSignUp() {
       },
     });
 
-    console.log(data);
-
     {
       /* TODO: 에러처리 구현 */
     }
@@ -92,10 +92,8 @@ export default function useSignUp() {
       return;
     }
 
-    {
-      /* 회원가입 성공 
-      TODO: 로그인 정보 상태관리, data 안에 accessToken 있습니다! */
-    }
+    //로그인 처리
+    login(data.session.access_token, data.user.id, data.user.user_metadata.nickname);
     navigate('/');
   }
 
