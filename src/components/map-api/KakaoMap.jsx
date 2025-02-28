@@ -35,9 +35,9 @@ function KakaoMap() {
     }
   }, []);
   return (
-    <div className='flex flex-col items-center justify-center bg-[#f5f5f5] w-screen h-screen '>
-      <h2 className='text-2xl font-semibold '>카카오맵 지도</h2>
-      <div id='map' ref={mapContainer} className='w-full h-full'></div>
+    <div className='flex flex-col items-center justify-center bg-[#f5f5f5] w-full h-full'>
+      {/* <h2 className='text-2xl font-semibold '>카카오맵 지도</h2> */}
+      <div id='map' ref={mapContainer} className='w-full h-[480px]'></div>
     </div>
   );
 }

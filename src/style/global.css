@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    color:theme
+body {
+  color: theme('colors.text-primary');
+}
+
+.flexCenter {
+  @apply flex items-center justify-center;
 }

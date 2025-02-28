@@ -1,11 +1,11 @@
-import KakaoMap from '../components/map-api/KakaoMap';
+// import KakaoMap from '../components/map-api/KakaoMap';
 
-function MapPage() {
-  return (
-    <div>
-      <KakaoMap />
-    </div>
-  );
-}
+// function MapPage() {
+//   return (
+//     <div>
+//       <KakaoMap />
+//     </div>
+//   );
+// }
 
-export default MapPage;
+// export default MapPage;
