@@ -25,7 +25,7 @@ export default function useSignUp() {
     nickname: '',
   });
 
-  const [isDuplicateChecked, setIsDuplicateChecked] = useState({ email: false, nickname: false });
+  const [isDuplicateChecked, setIsDuplicateChecked] = useState({ email: false });
   const navigate = useNavigate();
 
   function signUpChangeHandler(e) {
@@ -35,7 +35,7 @@ export default function useSignUp() {
     const errorMsg = signUpValidate(name, value, signUpFormData);
     setErrorMessage((prev) => ({ ...prev, [name]: errorMsg }));
 
-    if (name === 'email' || name === 'nickname') setIsDuplicateChecked((prev) => ({ ...prev, [name]: false }));
+    if (name === 'email') setIsDuplicateChecked({ [name]: false });
   }
 
   async function checkDuplicate(type) {
@@ -45,14 +45,13 @@ export default function useSignUp() {
       const { data } = await supabase.from('users').select().eq('email', signUpFormData.email);
       if (data.length !== 0) return setErrorMessage((prev) => ({ ...prev, [type]: errorMessageText.INVALID_EMAIL }));
 
-      setIsDuplicateChecked((prev) => ({ ...prev, [type]: true }));
+      setIsDuplicateChecked({ [type]: true });
       return setErrorMessage((prev) => ({ ...prev, [type]: errorMessageText.VALID_EMAIL }));
     }
 
     if (type === 'nickname') {
       if (errorMessage.nickname === errorMessageText.LIMIT_NICKNAME) return;
 
-      setIsDuplicateChecked((prev) => ({ ...prev, [type]: true }));
       return setErrorMessage((prev) => ({ ...prev, [type]: errorMessageText.VALID_NICKNAME }));
     }
   }

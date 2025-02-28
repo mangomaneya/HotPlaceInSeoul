@@ -1,8 +1,8 @@
-const InputForm = ({ labelName, ...children }) => {
+const InputForm = ({ labelName, name, type, placeholder, value, onChange, ...children }) => {
   return (
     <>
       <label>{labelName}:</label>
-      <input {...children}></input>
+      <input name={name} type={type} placeholder={placeholder} value={value} onChange={onChange} {...children}></input>
     </>
   );
 };
