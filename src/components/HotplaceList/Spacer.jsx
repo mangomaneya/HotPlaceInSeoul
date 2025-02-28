@@ -1,11 +1,9 @@
-const Spacer = ({ x, y }) => {
+export const Spacer = ({ x, y }) => {
   if (x) {
-    return <div className={`w-[${x}px]`}></div>;
+    return <div style={{ width: `${x}px` }} />;
   }
   if (y) {
-    return <div className={`h-[${y}px]`}></div>;
+    return <div style={{ height: `${y}px` }} />;
   }
   return null;
 };
-
-export default Spacer;

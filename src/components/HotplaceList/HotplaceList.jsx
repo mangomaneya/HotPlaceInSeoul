@@ -1,7 +1,7 @@
 import supabase from '@/lib/api/supabaseAPI';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import Spacer from './Spacer';
+import { Spacer } from './Spacer';
 const HotplaceList = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [datas, setDatas] = useState([]);
@@ -42,7 +42,7 @@ const HotplaceList = () => {
           ))}
         </div>
       )}
-      <Spacer y={300} />
+      <Spacer y={100} />
       <button onClick={toggleHotPlaceList} className='p-2 w-[250px] fixed bottom-5 border-2 bg-neutral-50'>
         {isVisible ? '핫플 닫기' : '핫플 보기'}
       </button>
