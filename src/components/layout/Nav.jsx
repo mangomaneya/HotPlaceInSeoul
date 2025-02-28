@@ -1,7 +1,11 @@
 import { PATH } from '@/constants/path-constant';
+import { openAlert } from '@/lib/utils/openAlert';
+import useAuthStore from '@/store/zustand/authStore';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-const { LOGIN, SIGN_UP } = PATH;
+const { LOGIN, SIGN_UP, HOME } = PATH;
+import { ALERT_TYPE } from '@/constants/alert-constant';
+const { WARNING } = ALERT_TYPE;
 
 const publicMenu = () => [
   {
@@ -16,23 +20,38 @@ const publicMenu = () => [
   },
 ];
 
+//로그인 되어야만 이동 가능한 경로
 const privateMenu = (btnEventFunc) => [
+  {
+    name: '북마크',
+    type: 'link',
+    path: HOME,
+  },
   {
     name: '로그아웃',
     type: 'button',
-    btnEven: btnEventFunc,
+    btnEvent: btnEventFunc,
   },
 ];
 
 export default function Nav() {
-  const isLogin = false; //TODO: 로그인 연결되면 수정하기
+  //전역상태 선택적 구독 반영
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const logout = useAuthStore((state) => state.logout);
   const navigate = useNavigate();
 
-  const moveToHome = () => {
-    navigate('/', { replace: true });
+  //로그아웃 버튼 동작
+  const handleLogout = async () => {
+    //로그아웃 confirm message
+    const response = await openAlert({ type: WARNING, text: '정말 로그아웃 하시겠습니까', buttonText: '로그아웃' });
+    // confirm 후 로그아웃 - 메인화면으로 이동
+    if (response.isConfirmed) {
+      logout();
+      navigate(HOME, { replace: true });
+    }
   };
 
-  const navMenu = isLogin ? privateMenu(moveToHome) : publicMenu();
+  const navMenu = isAuthenticated ? privateMenu(handleLogout) : publicMenu();
 
   return (
     <nav>
@@ -42,7 +61,7 @@ export default function Nav() {
             {menu.type === 'link' ? (
               <Link to={menu.path}>{menu.name}</Link>
             ) : (
-              <button onClick={menu.btnEven}>{menu.name}</button>
+              <button onClick={menu.btnEvent}>{menu.name}</button>
             )}
           </li>
         ))}
