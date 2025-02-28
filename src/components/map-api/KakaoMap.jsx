@@ -1,8 +1,18 @@
 import { useEffect, useRef } from 'react';
 import { positions } from './boundary';
-
+import supabase from '../../lib/api/supabaseAPI';
 function KakaoMap() {
   const mapContainer = useRef(null);
+
+  const hotplacePos = async () => {
+    const { data, error } = await supabase.from('hotplaces').select('*');
+
+    if (error) {
+      console.log('핫플레이스 데이터테이블', error);
+      return;
+    }
+  };
+  hotplacePos();
 
   useEffect(() => {
     if (window.kakao && window.kakao.maps) {
