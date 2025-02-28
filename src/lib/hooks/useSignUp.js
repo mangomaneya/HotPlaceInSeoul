@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signUpValidate } from '@utils/signUpValidate';
 import supabase from '@api/supabaseAPI';
-import useAuthStore from '@store/zustand/authStore';
+// import useAuthStore from '@store/zustand/authStore';
 
 const errorMessageText = {
   DUPLICATED: '중복 체크를 해주세요.',
@@ -27,7 +27,7 @@ export default function useSignUp() {
   });
 
   const [isDuplicateChecked, setIsDuplicateChecked] = useState({ email: false });
-  const login = useAuthStore((state) => state.login);
+  // const login = useAuthStore((state) => state.login);
   const navigate = useNavigate();
 
   function signUpChangeHandler(e) {
@@ -74,7 +74,7 @@ export default function useSignUp() {
       return;
     }
 
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: signUpFormData.email,
       password: signUpFormData.password,
       options: {
@@ -93,7 +93,7 @@ export default function useSignUp() {
     }
 
     //로그인 처리
-    login(data.session.access_token, data.user.id, data.user.user_metadata.nickname);
+    // login(data.session.access_token, data.user.id, data.user.user_metadata.nickname);
     navigate('/');
   }
 
