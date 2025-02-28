@@ -1,11 +1,8 @@
 import { PATH } from '@/constants/path-constant';
-import { openAlert } from '@/lib/utils/openAlert';
+import useLogout from '@hooks/useLogout';
 import useAuthStore from '@/store/zustand/authStore';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 const { LOGIN, SIGN_UP, HOME } = PATH;
-import { ALERT_TYPE } from '@/constants/alert-constant';
-const { WARNING } = ALERT_TYPE;
 
 const publicMenu = () => [
   {
@@ -35,21 +32,18 @@ const privateMenu = (btnEventFunc) => [
 ];
 
 export default function Nav() {
-  //전역상태 선택적 구독 반영
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const logout = useAuthStore((state) => state.logout);
-  const navigate = useNavigate();
+  const setUserData = useAuthStore((state) => state.setUserData);
+  const handleLogout = useLogout();
 
-  //로그아웃 버튼 동작
-  const handleLogout = async () => {
-    //로그아웃 confirm message
-    const response = await openAlert({ type: WARNING, text: '정말 로그아웃 하시겠습니까', buttonText: '로그아웃' });
-    // confirm 후 로그아웃 - 메인화면으로 이동
-    if (response.isConfirmed) {
-      logout();
-      navigate(HOME, { replace: true });
-    }
-  };
+  //로그인 여부를 토큰 키값 유무로 지정
+  const token = JSON.parse(localStorage.getItem('sb-frzxflvdpgomgaanvqyf-auth-token')) || null;
+  const isAuthenticated = !!token;
+  if (isAuthenticated) {
+    const { user, access_token } = token;
+    const { user_metadata } = user;
+    //전역상태 유저정보 세팅
+    setUserData(access_token, user.id, user_metadata.email, user_metadata.nickname);
+  }
 
   const navMenu = isAuthenticated ? privateMenu(handleLogout) : publicMenu();
 
