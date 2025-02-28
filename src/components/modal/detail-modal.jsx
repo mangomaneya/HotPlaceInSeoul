@@ -5,6 +5,8 @@ import { FaRegBookmark } from 'react-icons/fa6';
 import { FaBookmark } from 'react-icons/fa';
 import { useState } from 'react';
 import { STORE_CONSTANT } from '@/constants/store-constant';
+import { openAlert } from '@/lib/utils/openAlert';
+import { ALERT_TYPE } from '@/constants/alert-constant';
 const STORE_MOCK_DATA = {
   name: '양복점',
   category_name: '음식점',
@@ -14,7 +16,7 @@ const STORE_MOCK_DATA = {
   img_url:
     'https://ugc-images.catchtable.co.kr/catchtable/shopinfo/s2ITBk3Dv9LVsluH7e0DjIw/3619ed3090ef45d0a7e3f3c93e8489db',
 }; //TODO: supabase 데이터 완성되면 지울 예정
-
+const { INFO } = ALERT_TYPE;
 const { STORE_NAME, STORE_ADDRESS, STORE_CONTACT, STORE_PIC, BUSINESS_HOUR, CATEGORY } = STORE_CONSTANT;
 
 const DETAIL_LIST = [
@@ -46,8 +48,7 @@ export default function DetailModal() {
 
   const addToBookmark = () => {
     setIsBookMarked(!isBookMarked);
-    alert(`북마크${isBookMarked ? '에서 삭제' : '에 추가'}되었습니다.`);
-    //TODO: alert 추후에 sweetAlert를 쓰든 바꾸기
+    openAlert({ type: INFO, text: `북마크${isBookMarked ? '에서 삭제' : '에 추가'}되었습니다.` });
     //TODO: user의 bookmark 상태 바꾸기 (->post api연결)
   };
 
