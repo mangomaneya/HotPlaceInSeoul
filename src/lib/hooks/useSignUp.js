@@ -64,6 +64,9 @@ export default function useSignUp() {
   async function signUpSubmitHandler(e) {
     e.preventDefault();
 
+    {
+      /* TODO: 에러처리 구현 */
+    }
     if (!isValidForm()) {
       console.error('is Not Valid');
       return;
@@ -80,9 +83,18 @@ export default function useSignUp() {
     });
 
     console.log(data);
+
+    {
+      /* TODO: 에러처리 구현 */
+    }
     if (error) {
       console.error(error);
       return;
+    }
+
+    {
+      /* 회원가입 성공 
+      TODO: 로그인 정보 상태관리, data 안에 accessToken 있습니다! */
     }
     navigate('/');
   }
