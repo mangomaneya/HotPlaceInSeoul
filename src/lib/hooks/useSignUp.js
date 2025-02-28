@@ -25,7 +25,7 @@ export default function useSignUp() {
     nickname: '',
   });
 
-  const [isDuplicateChecked, setIsDuplicateChecked] = useState({ email: false, nickname: false });
+  const [isDuplicateChecked, setIsDuplicateChecked] = useState({ email: false });
   const navigate = useNavigate();
 
   function signUpChangeHandler(e) {
@@ -35,7 +35,7 @@ export default function useSignUp() {
     const errorMsg = signUpValidate(name, value, signUpFormData);
     setErrorMessage((prev) => ({ ...prev, [name]: errorMsg }));
 
-    if (name === 'email' || name === 'nickname') setIsDuplicateChecked((prev) => ({ ...prev, [name]: false }));
+    if (name === 'email') setIsDuplicateChecked({ [name]: false });
   }
 
   async function checkDuplicate(type) {
@@ -45,14 +45,13 @@ export default function useSignUp() {
       const { data } = await supabase.from('users').select().eq('email', signUpFormData.email);
       if (data.length !== 0) return setErrorMessage((prev) => ({ ...prev, [type]: errorMessageText.INVALID_EMAIL }));
 
-      setIsDuplicateChecked((prev) => ({ ...prev, [type]: true }));
+      setIsDuplicateChecked({ [type]: true });
       return setErrorMessage((prev) => ({ ...prev, [type]: errorMessageText.VALID_EMAIL }));
     }
 
     if (type === 'nickname') {
       if (errorMessage.nickname === errorMessageText.LIMIT_NICKNAME) return;
 
-      setIsDuplicateChecked((prev) => ({ ...prev, [type]: true }));
       return setErrorMessage((prev) => ({ ...prev, [type]: errorMessageText.VALID_NICKNAME }));
     }
   }
@@ -65,12 +64,15 @@ export default function useSignUp() {
   async function signUpSubmitHandler(e) {
     e.preventDefault();
 
+    {
+      /* TODO: 에러처리 구현 */
+    }
     if (!isValidForm()) {
       console.error('is Not Valid');
       return;
     }
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: signUpFormData.email,
       password: signUpFormData.password,
       options: {
@@ -80,9 +82,19 @@ export default function useSignUp() {
       },
     });
 
+    console.log(data);
+
+    {
+      /* TODO: 에러처리 구현 */
+    }
     if (error) {
       console.error(error);
       return;
+    }
+
+    {
+      /* 회원가입 성공 
+      TODO: 로그인 정보 상태관리, data 안에 accessToken 있습니다! */
     }
     navigate('/');
   }
