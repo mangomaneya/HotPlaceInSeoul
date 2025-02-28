@@ -13,6 +13,7 @@ export default defineConfig({
       { find: '@data', replacement: '/src/data' },
       { find: '@utils', replacement: '/src/lib/utils' },
       { find: '@api', replacement: '/src/lib/api' },
+      { find: '@hooks', replacement: '/src/lib/hooks' },
     ],
   },
 });
