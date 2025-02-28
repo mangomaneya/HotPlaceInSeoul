@@ -4,6 +4,7 @@ import { FaYoutube } from 'react-icons/fa6';
 import { FaRegBookmark } from 'react-icons/fa6';
 import { FaBookmark } from 'react-icons/fa';
 import { useState } from 'react';
+import { STORE_CONSTANT } from '@/constants/store-constant';
 const STORE_MOCK_DATA = {
   name: '양복점',
   category_name: '음식점',
@@ -13,15 +14,6 @@ const STORE_MOCK_DATA = {
   img_url:
     'https://ugc-images.catchtable.co.kr/catchtable/shopinfo/s2ITBk3Dv9LVsluH7e0DjIw/3619ed3090ef45d0a7e3f3c93e8489db',
 }; //TODO: supabase 데이터 완성되면 지울 예정
-
-const STORE_CONSTANT = {
-  STORE_NAME: 'name',
-  STORE_ADDRESS: 'address_road_name',
-  STORE_CONTACT: 'contact_number',
-  CATEGORY: 'category_name',
-  STORE_PIC: 'img_url',
-  BUSINESS_HOUR: 'open_hours',
-}; //@TODO: 현재 기준 supabase의 data table을 기준으로 가져온 key입니다.
 
 const { STORE_NAME, STORE_ADDRESS, STORE_CONTACT, STORE_PIC, BUSINESS_HOUR, CATEGORY } = STORE_CONSTANT;
 
@@ -33,17 +25,17 @@ const DETAIL_LIST = [
   {
     key: STORE_ADDRESS,
     title: '주소',
-    default: '등록된 주소가 없습니다.',
+    defaultMessage: '등록된 주소가 없습니다.',
   },
   {
     key: STORE_CONTACT,
     title: '전화번호',
-    default: '등록된 전화번호가 없습니다.',
+    defaultMessage: '등록된 전화번호가 없습니다.',
   },
   {
     key: BUSINESS_HOUR,
     title: '영업 시간',
-    default: '업체에 직접 문의해 주세요.',
+    defaultMessage: '업체에 직접 문의해 주세요.',
   },
 ];
 
@@ -60,35 +52,35 @@ export default function DetailModal() {
   };
 
   return (
-    <section className='bg-accent w-[40%] max-w-[650px] min-w-[300px] min-h-[50dvh] max-h-[85dvh] overflow-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-8 py-10 rounded-lg '>
+    <section className='modal'>
       <p className='h-[80%] md:h-[65%] max-h-[400px] mb-5'>
         <img
           src={STORE_MOCK_DATA[STORE_PIC]}
           alt={STORE_MOCK_DATA[STORE_NAME]}
           className='object-cover w-full h-full rounded-lg'
         />
-        <span className='text-text-light absolute top-2 right-2 text-2xl cursor-pointer '>
+        <span className='text-text-primary absolute top-2 right-2 text-2xl cursor-pointer '>
           <IoCloseOutline />
         </span>
       </p>
 
       <div className='flexCenter !justify-between  mb-[10px]'>
-        <h4 className='font-bold text-2xl sm:text-3xl text-text-light'>{STORE_MOCK_DATA[STORE_NAME]}</h4>
+        <h4 className='font-bold text-2xl sm:text-3xl text-accent-active'>{STORE_MOCK_DATA[STORE_NAME]}</h4>
         <span className='text-2xl cursor-pointer' onClick={addToBookmark}>
-          {isBookMarked ? <FaBookmark className='text-text-light' /> : <FaRegBookmark className='text-text-light' />}
+          {isBookMarked ? <FaBookmark className='text-accent' /> : <FaRegBookmark className='text-accent' />}
         </span>
       </div>
 
-      <dl className='flex flex-wrap mb-[20px] text-text-light'>
+      <dl className='flex flex-wrap mb-[20px] '>
         {DETAIL_LIST.map((list) => (
           <React.Fragment key={list.key}>
             <dt className='w-[30%] sm:w-[20%] m-w-[150px] mb-1'>{list.title}</dt>
-            <dd className='w-[70%] sm:w-[80%]'>{STORE_MOCK_DATA[list.key] ?? list?.default}</dd>
+            <dd className='w-[70%] sm:w-[80%]'>{STORE_MOCK_DATA[list.key] ?? list?.defaultMessage}</dd>
           </React.Fragment>
         ))}
       </dl>
-      <button className='w-full bg-white text-text-primary text-center py-1 rounded-lg'>
-        <FaYoutube className='text-4xl w-full' />
+      <button className='w-full bg-accent text-text-primary text-center py-1 rounded-lg'>
+        <FaYoutube className='text-4xl w-full text-white' />
       </button>
     </section>
   );
