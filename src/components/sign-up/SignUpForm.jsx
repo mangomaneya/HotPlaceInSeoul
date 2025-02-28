@@ -7,7 +7,7 @@ export default function SignUpForm() {
 
   return (
     <form onSubmit={signUpSubmitHandler} className='flex flex-col'>
-      <div>
+      <div className='flex'>
         <InputForm
           className=''
           labelName='이메일'
@@ -26,6 +26,7 @@ export default function SignUpForm() {
           중복체크
         </button>
       </div>
+      <p className={isDuplicateChecked.email ? 'text-green-500' : 'text-red-500'}>{errorMessage.email}</p>
       <InputForm
         className=''
         labelName='비밀번호'
@@ -35,6 +36,7 @@ export default function SignUpForm() {
         value={signUpFormData.password}
         onChange={signUpChangeHandler}
       />
+      <p className='text-red-500'>{errorMessage.password}</p>
       <InputForm
         className=''
         labelName='비밀번호 재입력'
@@ -44,6 +46,7 @@ export default function SignUpForm() {
         value={signUpFormData.confirmPassword}
         onChange={signUpChangeHandler}
       />
+      <p className='text-red-500'>{errorMessage.confirmPassword}</p>
       <div>
         <InputForm
           labelName='닉네임'

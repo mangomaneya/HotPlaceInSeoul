@@ -69,7 +69,7 @@ export default function useSignUp() {
       return;
     }
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: signUpFormData.email,
       password: signUpFormData.password,
       options: {
@@ -79,6 +79,7 @@ export default function useSignUp() {
       },
     });
 
+    console.log(data);
     if (error) {
       console.error(error);
       return;
