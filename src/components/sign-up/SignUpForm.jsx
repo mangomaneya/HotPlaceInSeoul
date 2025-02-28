@@ -54,16 +54,8 @@ export default function SignUpForm() {
           value={signUpFormData.nickname}
           onChange={signUpChangeHandler}
         />
-        <button
-          type='button'
-          onClick={() => {
-            checkDuplicate('nickname');
-          }}
-        >
-          유효성 검증
-        </button>
+        {errorMessage.nickname}
       </div>
-      {errorMessage.nickname}
       <button type='submit'>회원가입</button>
     </form>
   );
