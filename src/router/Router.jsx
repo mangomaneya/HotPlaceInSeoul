@@ -3,6 +3,7 @@ import Home from '@pages/Home';
 import Layout from '@/components/layout/Layout';
 import { PATH } from '@/constants/path-constant';
 import BookMark from '@/pages/BookMark/BookMark';
+import HotplaceList from '@/components/HotplaceList/HotplaceList';
 const { LOGIN, SIGN_UP, BOOK_MARK } = PATH;
 export default function Router() {
   return (
@@ -16,6 +17,7 @@ export default function Router() {
           <Route path={SIGN_UP} element={<div>회원가입</div>} />
           {/* MOCK-DATA 제거 시 파일 위치 변경 필요 */}
           <Route path={BOOK_MARK} element={<BookMark />} />
+          <Route path={'/list'} element={<HotplaceList />} />
         </Route>
       </Routes>
     </BrowserRouter>
