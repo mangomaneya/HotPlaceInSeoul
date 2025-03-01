@@ -36,8 +36,8 @@ export default function YoutubeModal() {
   }
 
   return (
-    <section className='youtubeModal'>
-      <button className='modalBtn !text-white !py-2 !mb-4'>유튜브 닫기</button>
+    <section className='youtubeModal fixedCenter'>
+      <button className='modalBtn !py-2 !mb-4'>유튜브 닫기</button>
       {youtubeData?.map((data, index) => (
         <div
           key={data.title}
