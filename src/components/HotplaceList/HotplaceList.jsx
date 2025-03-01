@@ -22,8 +22,12 @@ const HotplaceList = () => {
   }
 
   return (
-    <aside className={`m-3 ${isVisible && 'bg-neutral-50 w-[250px]'}`}>
-      {isVisible && (
+    <aside className='m-3 relative w-[250px]'>
+      <div
+        className={`${
+          isVisible ? 'slide-up opacity-100' : 'opacity-0'
+        } transition-opacity duration-300 bg-neutral-50 w-[250px]`}
+      >
         <div className='overflow-y-auto'>
           {hotplaces.map((data) => (
             <section
@@ -43,9 +47,8 @@ const HotplaceList = () => {
             </section>
           ))}
         </div>
-      )}
-      <Spacer y={50} />
-      <button onClick={toggleHotPlaceList} className='fixed p-2 w-[250px] bg-button bottom-3 border-2  rounded-t-2xl'>
+      </div>
+      <button onClick={toggleHotPlaceList} className='fixed p-2 w-[250px] bg-button bottom-3 border-2 rounded-t-2xl'>
         {isVisible ? '핫플 닫기' : '핫플 보기'}
       </button>
     </aside>
