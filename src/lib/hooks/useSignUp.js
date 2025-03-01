@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signUpValidate } from '@utils/signUpValidate';
 import supabase from '@api/supabaseAPI';
+import useAuthStore from '@store/zustand/authStore';
 
 const errorMessageText = {
   DUPLICATED: '중복 체크를 해주세요.',
@@ -25,7 +26,8 @@ export default function useSignUp() {
     nickname: '',
   });
 
-  const [isDuplicateChecked, setIsDuplicateChecked] = useState({ email: false, nickname: false });
+  const [isDuplicateChecked, setIsDuplicateChecked] = useState({ email: false });
+  const login = useAuthStore((state) => state.login);
   const navigate = useNavigate();
 
   function signUpChangeHandler(e) {
@@ -35,7 +37,7 @@ export default function useSignUp() {
     const errorMsg = signUpValidate(name, value, signUpFormData);
     setErrorMessage((prev) => ({ ...prev, [name]: errorMsg }));
 
-    if (name === 'email' || name === 'nickname') setIsDuplicateChecked((prev) => ({ ...prev, [name]: false }));
+    if (name === 'email') setIsDuplicateChecked({ [name]: false });
   }
 
   async function checkDuplicate(type) {
@@ -45,14 +47,13 @@ export default function useSignUp() {
       const { data } = await supabase.from('users').select().eq('email', signUpFormData.email);
       if (data.length !== 0) return setErrorMessage((prev) => ({ ...prev, [type]: errorMessageText.INVALID_EMAIL }));
 
-      setIsDuplicateChecked((prev) => ({ ...prev, [type]: true }));
+      setIsDuplicateChecked({ [type]: true });
       return setErrorMessage((prev) => ({ ...prev, [type]: errorMessageText.VALID_EMAIL }));
     }
 
     if (type === 'nickname') {
       if (errorMessage.nickname === errorMessageText.LIMIT_NICKNAME) return;
 
-      setIsDuplicateChecked((prev) => ({ ...prev, [type]: true }));
       return setErrorMessage((prev) => ({ ...prev, [type]: errorMessageText.VALID_NICKNAME }));
     }
   }
@@ -65,12 +66,15 @@ export default function useSignUp() {
   async function signUpSubmitHandler(e) {
     e.preventDefault();
 
+    {
+      /* TODO: 에러처리 구현 */
+    }
     if (!isValidForm()) {
       console.error('is Not Valid');
       return;
     }
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: signUpFormData.email,
       password: signUpFormData.password,
       options: {
@@ -80,10 +84,16 @@ export default function useSignUp() {
       },
     });
 
+    {
+      /* TODO: 에러처리 구현 */
+    }
     if (error) {
       console.error(error);
       return;
     }
+
+    //로그인 처리
+    login(data.session.access_token, data.user.id, data.user.user_metadata.nickname);
     navigate('/');
   }
 
