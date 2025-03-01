@@ -1,4 +1,4 @@
-import { useYoutubeQuery } from '@/lib/queries_test/useYoutubeQuery';
+import { useYoutubeQuery } from '@/lib/queries/useYoutubeQuery';
 import { formatDateFromISO } from '@/lib/utils/formatDate';
 import Loading from '../common/Loading';
 import Error from '../common/Error';
@@ -9,7 +9,9 @@ const { ERROR } = ALERT_TYPE;
 const STORE_NAME = '양복점';
 const AREA = '용산';
 const STORE_ID = '1c3a14f9-2664-4e9b-8435-71d620716efc';
-export default function YoutubeModal({ closeModal }) {
+
+//@TODO: closeModal 받아오기
+export default function YoutubeModal() {
   const { youtubeData, isPending, isError, error } = useYoutubeQuery({
     storeName: STORE_NAME,
     area: AREA,
@@ -35,9 +37,7 @@ export default function YoutubeModal({ closeModal }) {
 
   return (
     <section className='youtubeModal'>
-      <button className='modalBtn !text-white !py-2 !mb-4' onClick={() => closeModal('youtube')}>
-        유튜브 닫기
-      </button>
+      <button className='modalBtn !text-white !py-2 !mb-4'>유튜브 닫기</button>
       {youtubeData?.map((data, index) => (
         <div
           key={data.title}
