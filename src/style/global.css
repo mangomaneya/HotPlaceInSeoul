@@ -18,7 +18,7 @@ body {
 }
 
 .youtubeModal {
-  @apply bg-bg-primary px-8 py-10 rounded-lg shadow-xl w-[90vw] max-w-[1000px] h-[80dvh] max-h-[700px];
+  @apply bg-bg-primary px-8 py-10 rounded-lg shadow-xl w-[90vw] max-w-[1000px] h-[80dvh] max-h-[900px];
 }
 
 .modalBtn {
