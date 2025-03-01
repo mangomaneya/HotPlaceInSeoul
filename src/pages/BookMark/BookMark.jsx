@@ -41,10 +41,10 @@ const BookMark = () => {
                 <p className='flexCenter mt-3 text-[20px]'>{data.hotplaces.name}</p>
               </div>
             </section>
-            {selectPost && <DetailModal id={selectPost} />}
           </div>
         ))}
       </main>
+      {selectPost && <DetailModal id={selectPost} />}
     </div>
   );
 };
