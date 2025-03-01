@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 import { PATH } from '@/constants/path-constant';
 import Home from '@/pages/Home';
-import ProtectedRouter from './ProtectedRouter';
+import ProtectedRouter from '@router/ProtectedRouter';
 import SignUp from '@/pages/SignUp';
 import Login from '@/pages/Login';
 const { LOGIN, SIGN_UP, HOME, BOOK_MARK } = PATH;
