@@ -1,11 +1,9 @@
 import LoginForm from '@components/login/LoginForm';
 
-const Login = () => {
+export default function Login() {
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <div className='flexCenter flex-col'>
       <LoginForm />
     </div>
   );
-};
-
-export default Login;
+}
