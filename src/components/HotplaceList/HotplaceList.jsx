@@ -36,7 +36,7 @@ const HotplaceList = () => {
               <div className='text-orange-400 text-[23px]'>{data.name}</div>
               <div className='text-neutral-400 text-[15px]'>{data.category_name}</div>
             </div>
-            <div className='text-[13px]'>{data.address_road_name}</div>
+            <h3 className='text-[13px]'>{data.address_road_name}</h3>
             <div className='flex gap-4 items-center'>
               <div className='text-lime-600'>{data.contact_number}</div>
             </div>
