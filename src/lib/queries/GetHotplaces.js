@@ -10,5 +10,5 @@ export const useGetHotplaces = () => {
     return data;
   };
 
-  return useQuery({ queryKey: ['hotplaces'], queryFn: getHotplaces });
+  return useQuery({ queryKey: ['hotplaces'], queryFn: getHotplaces, staleTime: 3600 * 1000 });
 };
