@@ -20,7 +20,7 @@ const HotplaceList = () => {
   }
 
   return (
-    <aside className='m-3 w-[250px]'>
+    <article className='m-3 w-[250px]'>
       <div
         className={`${
           isVisible ? 'slide-up opacity-100' : 'opacity-0'
@@ -47,7 +47,7 @@ const HotplaceList = () => {
         {isVisible ? '핫플 닫기' : '핫플 보기'}
       </button>
       {selectedPost && <DetailModal id={selectedPost} />}
-    </aside>
+    </article>
   );
 };
 
