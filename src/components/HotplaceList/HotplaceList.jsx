@@ -22,7 +22,7 @@ const HotplaceList = () => {
   }
 
   return (
-    <aside className='m-3 relative w-[250px]'>
+    <aside className='m-3  w-[250px]'>
       <div
         className={`${
           isVisible ? 'slide-up opacity-100' : 'opacity-0'
@@ -31,8 +31,8 @@ const HotplaceList = () => {
         <div className='overflow-y-auto'>
           {hotplaces.map((data) => (
             <section
-              onClick={() => setSelectedPost(data.id)}
               key={data.id}
+              onClick={() => setSelectedPost(data.id)}
               className='border-2 w-[250px] p-3 mb-3 bg-neutral-50 cursor-pointer'
             >
               <div className='flex gap-4 items-center'>
@@ -43,7 +43,6 @@ const HotplaceList = () => {
               <div className='flex gap-4 items-center'>
                 <div className='text-lime-600'>{data.contact_number}</div>
               </div>
-              {selectedPost && <DetailModal id={data.id} />}
             </section>
           ))}
         </div>
@@ -51,6 +50,7 @@ const HotplaceList = () => {
       <button onClick={toggleHotPlaceList} className='fixed p-2 w-[250px] bg-button bottom-3 border-2 rounded-t-2xl'>
         {isVisible ? '핫플 닫기' : '핫플 보기'}
       </button>
+      {selectedPost && <DetailModal id={selectedPost} />}
     </aside>
   );
 };
