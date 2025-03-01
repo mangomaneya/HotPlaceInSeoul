@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { Spacer } from './Spacer';
 import { useGetHotplaces } from '@/lib/queries/GetHotplaces';
+import { useNavigate } from 'react-router-dom';
+import DetailModal from '../modal/detail-modal';
 
 const HotplaceList = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
   const { data: hotplaces = [], isPending, isError } = useGetHotplaces();
 
   function toggleHotPlaceList() {
@@ -23,7 +26,11 @@ const HotplaceList = () => {
       {isVisible && (
         <div className='overflow-y-auto'>
           {hotplaces.map((data) => (
-            <section key={data.id} className='border-2 w-[250px] p-3 mb-3 bg-neutral-50 cursor-pointer'>
+            <section
+              onClick={() => setSelectedPost(data.id)}
+              key={data.id}
+              className='border-2 w-[250px] p-3 mb-3 bg-neutral-50 cursor-pointer'
+            >
               <div className='flex gap-4 items-center'>
                 <div className='text-orange-400 text-[23px]'>{data.name}</div>
                 <div className='text-neutral-400 text-[15px]'>{data.category_name}</div>
@@ -32,6 +39,7 @@ const HotplaceList = () => {
               <div className='flex gap-4 items-center'>
                 <div className='text-lime-600'>{data.contact_number}</div>
               </div>
+              {selectedPost && <DetailModal id={data.id} />}
             </section>
           ))}
         </div>
