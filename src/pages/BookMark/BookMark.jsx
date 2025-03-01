@@ -1,4 +1,3 @@
-import React from 'react';
 import DetailModal from '@/components/modal/detail-modal';
 import { useGetBookmarks } from '@/lib/queries/GetBookmarks';
 import { useState } from 'react';
@@ -32,18 +31,18 @@ const BookMark = () => {
         </div>
       </section>
       {booksNum === 0 && <p className='flexCenter mt-[90px]'>아직 북마크 된 장소가 없습니다!</p>}
-      <main className='grid place-items-center mt-[120px] grid-cols-1 sm:grid-cols-2 xl:grid-cols-4'>
+      <div className='grid place-items-center mt-[120px] grid-cols-1 sm:grid-cols-2 xl:grid-cols-4'>
         {bookmarkList.map((data) => (
           <div key={data.id} onClick={() => setSelectPost(data.place_id)} className='flexCenter mb-[20px]'>
             <section className='relative m-3 w-[280px] bg-neutral-50 rounded-lg pb-3 cursor-pointer shadow-lg hover:-translate-y-3 transition-transform duration-300 ease-in-out'>
               <img src={data.hotplaces.img_url} className='bg-neutral-400 h-[300px] w-[280px] rounded-t-lg' />
               <div className='flexCenter'>
-                <p className='flexCenter mt-3 text-[20px]'>{data.hotplaces.name}</p>
+                <h3 className='flexCenter mt-3 text-[20px]'>{data.hotplaces.name}</h3>
               </div>
             </section>
           </div>
         ))}
-      </main>
+      </div>
       {selectPost && <DetailModal id={selectPost} />}
     </div>
   );
