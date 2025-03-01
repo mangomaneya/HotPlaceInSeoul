@@ -4,7 +4,8 @@ import { PATH } from '@constants/path-constant';
 import Home from '@pages/Home';
 import SignUp from '@pages/SignUp';
 import Login from '@pages/Login';
-import ProtectedRouter from './ProtectedRouter';
+import ProtectedRouter from '@router/ProtectedRouter';
+import NotFoundedPage from '@/pages/NotFoundedPage';
 const { LOGIN, SIGN_UP, HOME, BOOK_MARK } = PATH;
 export default function Router() {
   return (
@@ -12,6 +13,7 @@ export default function Router() {
       <Routes>
         <Route path={HOME} element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path='*' element={<NotFoundedPage />} />
           <Route path={LOGIN} element={<Login />} />
           <Route path={SIGN_UP} element={<SignUp />} />
           {/* 로그인해야지만 갈 수 있는 경로 반영 */}
