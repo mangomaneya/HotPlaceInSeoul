@@ -4,12 +4,12 @@ import { PATH } from '@constants/path-constant';
 import Home from '@pages/Home';
 import SignUp from '@pages/SignUp';
 import Login from '@pages/Login';
-const { LOGIN, SIGN_UP } = PATH;
+const { LOGIN, SIGN_UP, HOME } = PATH;
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Layout />}>
+        <Route path={HOME} element={<Layout />}>
           <Route index element={<Home />} />
           {/* //TODO: 로그인 컴포넌트 연결해 주세요 */}
           <Route path={LOGIN} element={<Login />} />
