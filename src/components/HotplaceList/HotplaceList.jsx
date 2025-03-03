@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useGetHotplaces } from '@/lib/queries/GetHotplaces';
 import DetailModal from '../modal/detail-modal';
+import { STORE_CONSTANT } from '@/constants/store-constant';
 
 const HotplaceList = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -32,12 +33,12 @@ const HotplaceList = () => {
               className='border-2 w-[250px] p-3 mb-3 bg-neutral-50 cursor-pointer'
             >
               <div className='flex gap-4 items-center'>
-                <div className='text-orange-400 text-[23px]'>{data.name}</div>
-                <div className='text-neutral-400 text-[15px]'>{data.category_name}</div>
+                <p className='text-orange-400 text-[23px]'>{data[STORE_CONSTANT.STORE_NAME]}</p>
+                <p className='text-neutral-400 text-[15px]'>{data[STORE_CONSTANT.CATEGORY]}</p>
               </div>
-              <h3 className='text-[13px]'>{data.address_road_name}</h3>
+              <p className='text-[13px]'>{data[STORE_CONSTANT.STORE_ADDRESS]}</p>
               <div className='flex gap-4 items-center'>
-                <div className='text-lime-600'>{data.contact_number}</div>
+                <p className='text-lime-600'>{data[STORE_CONSTANT.STORE_CONTACT]}</p>
               </div>
             </section>
           ))}
