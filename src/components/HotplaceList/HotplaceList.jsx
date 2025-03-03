@@ -33,7 +33,7 @@ const HotplaceList = () => {
               className='border-2 w-[250px] p-3 mb-3 bg-neutral-50 cursor-pointer'
             >
               <div className='flex gap-4 items-center'>
-                <p className='text-orange-400 text-[23px]'>{data[STORE_CONSTANT.STORE_NAME]}</p>
+                <h3 className='text-orange-400 text-[23px]'>{data[STORE_CONSTANT.STORE_NAME]}</h3>
                 <p className='text-neutral-400 text-[15px]'>{data[STORE_CONSTANT.CATEGORY]}</p>
               </div>
               <p className='text-[13px]'>{data[STORE_CONSTANT.STORE_ADDRESS]}</p>
