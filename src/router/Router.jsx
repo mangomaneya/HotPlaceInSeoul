@@ -3,6 +3,8 @@ import Layout from '@components/layout/Layout';
 import { PATH } from '@/constants/path-constant';
 import BookMark from '@/pages/BookMark/BookMark';
 import Home from '@/pages/Home';
+import Login from '@/pages/Login';
+import SignUp from '@/pages/SignUp';
 const { LOGIN, SIGN_UP, BOOK_MARK } = PATH;
 export default function Router() {
   return (
@@ -11,9 +13,8 @@ export default function Router() {
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
           {/* //TODO: 로그인 컴포넌트 연결해 주세요 */}
-          <Route path={LOGIN} element={<div>login</div>} />
-          {/*  //TODO: 회원가입 페이지 연결해 주세요 */}
-          <Route path={SIGN_UP} element={<div>회원가입</div>} />
+          <Route path={LOGIN} element={<Login />} />
+          <Route path={SIGN_UP} element={<SignUp />} />
           <Route path={BOOK_MARK} element={<BookMark />} />
         </Route>
       </Routes>
