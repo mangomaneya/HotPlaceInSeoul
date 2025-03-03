@@ -11,7 +11,6 @@ export default function Router() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
-          {/* //TODO: 로그인 컴포넌트 연결해 주세요 */}
           <Route path={LOGIN} element={<Login />} />
           <Route path={SIGN_UP} element={<SignUp />} />
         </Route>
