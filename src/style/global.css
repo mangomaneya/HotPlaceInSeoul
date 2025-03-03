@@ -10,8 +10,19 @@ body {
   @apply flex items-center justify-center;
 }
 
+.fixedCenter {
+  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-auto;
+}
 .modal {
-  @apply bg-[rgb(246,245,245)] w-[40%] max-w-[650px] min-w-[300px] min-h-[50dvh] max-h-[85dvh] overflow-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-8 py-10 rounded-lg shadow-xl border border-slate-200;
+  @apply bg-[rgb(246,245,245)] w-[40%] max-w-[650px] min-w-[300px] min-h-[50dvh] max-h-[85dvh]  px-8 py-10 rounded-lg shadow-xl border border-slate-200;
+}
+
+.youtubeModal {
+  @apply bg-bg-primary px-8 py-10 rounded-lg shadow-xl w-[90vw] max-w-[1000px] h-[80dvh] max-h-[900px];
+}
+
+.modalBtn {
+  @apply w-full bg-accent text-text-light text-center py-1 rounded-lg;
 }
 
 @layer components {

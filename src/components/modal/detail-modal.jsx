@@ -53,7 +53,7 @@ export default function DetailModal() {
   };
 
   return (
-    <section className='modal'>
+    <section className='modal fixedCenter flex flex-col justify-evenly'>
       <p className='h-[80%] md:h-[65%] max-h-[400px] mb-5'>
         <img
           src={STORE_MOCK_DATA[STORE_PIC]}
@@ -75,12 +75,12 @@ export default function DetailModal() {
       <dl className='flex flex-wrap mb-[20px] '>
         {DETAIL_LIST.map((list) => (
           <React.Fragment key={list.key}>
-            <dt className='w-[30%] sm:w-[20%] m-w-[150px] mb-1'>{list.title}</dt>
-            <dd className='w-[70%] sm:w-[80%]'>{STORE_MOCK_DATA[list.key] ?? list?.defaultMessage}</dd>
+            <dt className='w-[30%] sm:w-[80px] mb-1'>{list.title}</dt>
+            <dd className='w-[70%] sm:w-[calc(100%-80px)]'>{STORE_MOCK_DATA[list.key] ?? list?.defaultMessage}</dd>
           </React.Fragment>
         ))}
       </dl>
-      <button className='w-full bg-accent text-text-primary text-center py-1 rounded-lg'>
+      <button className='modalBtn'>
         <FaYoutube className='text-4xl w-full text-white' />
       </button>
     </section>
