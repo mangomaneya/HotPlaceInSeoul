@@ -24,3 +24,19 @@ body {
 .modalBtn {
   @apply w-full bg-accent text-text-light text-center py-1 rounded-lg;
 }
+
+@layer components {
+  .slide-up {
+    animation: slide-up 0.8s ease-out forwards;
+  }
+  @keyframes slide-up {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
