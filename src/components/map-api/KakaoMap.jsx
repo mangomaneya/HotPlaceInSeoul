@@ -4,17 +4,18 @@ import supabase from '../../lib/api/supabaseAPI';
 import MapController from './MapController';
 import { openAlert } from '@/lib/utils/openAlert';
 import { ALERT_TYPE } from '@/constants/alert-constant';
-import YoutubeModal from '../modal/youtube-modal';
+import useAreaStore from '@/store/zustand/useAreaStore';
 import DetailModal from '../modal/detail-modal';
 const { ERROR } = ALERT_TYPE;
-function KakaoMap({ selectedArea }) {
+function KakaoMap() {
   const mapContainer = useRef(null); //지도 컨테이너
   const [markerData, setMarkerData] = useState([]);
-  const [mapCenter, setMapCenter] = useState({ lat: 37.5487477114048, lon: 127.04589900432654 });
+  const { mapCenter, setMapCenter } = useAreaStore();
+  // const [mapCenter, setMapCenter] = useState({ lat: 37.5487477114048, lon: 127.04589900432654 });
   const [clickedMarker, setClickedMarker] = useState({}); // toggle여부를 위한 상태
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [dataLoading, setDataLoading] = useState(true);
-  const [isYoutubeModalOpen, setIsYoutubeModalOpen] = useState(false);
+
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   //supabase의 데이터 호출부
 
@@ -52,10 +53,7 @@ function KakaoMap({ selectedArea }) {
         return;
       }
       markerData.forEach((item) => {
-        const name = item.name;
-        const uniqueId = item.id;
-        const area = item.area;
-        //지도 마커 좌표 설정정
+        //지도 마커 좌표 설정
         const lat = parseFloat(item.latitude);
         const lon = parseFloat(item.longitude);
         const markerPosition = new kakao.maps.LatLng(lat, lon);
@@ -99,7 +97,6 @@ function KakaoMap({ selectedArea }) {
         //커스텀 오버레이 이벤트 등록록
         overlayContent.querySelector(`#detail-btn-${item.id}`).addEventListener('click', () => {
           setSelectedMarker({ id: item.id, name: item.name, area: item.area });
-          setIsYoutubeModalOpen(true);
         });
 
         kakao.maps.event.addListener(marker, 'click', function () {
@@ -134,7 +131,7 @@ function KakaoMap({ selectedArea }) {
     }
   }, [markerData, mapCenter]);
   const handlePlaceSelect = (lat, lon) => {
-    setMapCenter({ lat, lon });
+    setMapCenter(lat, lon);
   };
   return (
     <>

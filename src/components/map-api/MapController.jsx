@@ -1,7 +1,9 @@
 import { useState } from 'react';
-
-export default function MapController({ handlePlaceSelect }) {
+import useAreaStore from '@/store/zustand/useAreaStore';
+export default function MapController() {
   const [coordinate, setCoordinate] = useState('');
+  const { setSelectedArea, setMapCenter } = useAreaStore();
+
   const locationCoords = {
     '성수동': { lat: 37.5432, lon: 127.0563 },
     '인사동': { lat: 37.5744, lon: 126.9871 },
@@ -14,7 +16,8 @@ export default function MapController({ handlePlaceSelect }) {
     setCoordinate(area);
 
     if (locationCoords[area]) {
-      handlePlaceSelect(locationCoords[area].lat, locationCoords[area].lon, area);
+      setMapCenter(locationCoords[area].lat, locationCoords[area].lon);
+      setSelectedArea(area);
     }
   };
   return (
