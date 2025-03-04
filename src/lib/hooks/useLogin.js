@@ -11,7 +11,7 @@ export default function useLogin() {
   const setUserData = useAuthStore((state) => state.setUserData);
   const { SUCCESS } = ALERT_TYPE;
 
-  const redirectedFrom = useLocation()?.state?.redirectedFrom || '/';
+  const redirectedFrom = useLocation()?.state?.from || '/';
   const navigate = useNavigate();
   const redirectPath = redirectedFrom === '/login' ? '/' : redirectedFrom;
 
