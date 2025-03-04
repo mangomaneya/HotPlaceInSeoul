@@ -17,9 +17,9 @@ export default function MapController({ handlePlaceSelect }) {
     }
   };
   return (
-    <div className='flex items-center '>
+    <div className='flex items-center gap-4'>
       <select
-        className='w-[200px] h-[50px] border-solid border-[6px] rounded-xl border-neutral-300'
+        className=' w-[200px] h-[50px] border-solid border-[6px] rounded-xl border-neutral-300'
         value={coordinate}
         onChange={handleSelect}
       >
@@ -27,7 +27,7 @@ export default function MapController({ handlePlaceSelect }) {
         <option value='인사/낙원'>인사/낙원</option>
         <option value='망원동'>망원동</option>
       </select>
-      <button className='w-[250px] h-[40px] rounded-md bg-orange-500 '>목록</button>
+      <button className='text-xl w-[200px] h-[40px] rounded-md bg-button text-accent '>목록</button>
     </div>
   );
 }

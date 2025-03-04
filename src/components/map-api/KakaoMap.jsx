@@ -4,9 +4,10 @@ import supabase from '../../lib/api/supabaseAPI';
 import MapController from './MapController';
 function KakaoMap() {
   const mapContainer = useRef(null); //지도 컨테이너
-  const map = useRef(null); // 지도 객체
+  // const map = useRef(null); // 지도 객체
   const [markerData, setMarkerData] = useState([]);
   const [mapCenter, setMapCenter] = useState({ lat: 37.5487477114048, lon: 127.04589900432654 });
+  const [clickedMarker, setClickedMarker] = useState({});
   //supabase의 데이터 호출부
   useEffect(() => {
     const handlemarkerData = async () => {
@@ -40,15 +41,15 @@ function KakaoMap() {
         const lon = parseFloat(item.longitude);
         const markerPosition = new kakao.maps.LatLng(lat, lon);
         //커스텀 오버레이 설정 변수
+        const clickedMarkerImgSrc = '../../../public/activeMarker.svg';
         const hotplaceMarkerImgSrc = '../../../public/hotplaceMarker.svg';
+
+        const isMarkerClicked = clickedMarker[item.id] || false;
+        const markerImgSrc = isMarkerClicked ? clickedMarkerImgSrc : hotplaceMarkerImgSrc;
         const hotplaceMarkerSize = new kakao.maps.Size(20, 40);
         const hotplaceMarkerOption = { offset: new kakao.maps.Point(20, 40) };
         //커스텀 오버레이 마커 생성
-        const hotplaceMarker = new kakao.maps.MarkerImage(
-          hotplaceMarkerImgSrc,
-          hotplaceMarkerSize,
-          hotplaceMarkerOption
-        );
+        const hotplaceMarker = new kakao.maps.MarkerImage(markerImgSrc, hotplaceMarkerSize, hotplaceMarkerOption);
 
         const marker = new kakao.maps.Marker({
           map: map,
@@ -65,6 +66,18 @@ function KakaoMap() {
         });
 
         kakao.maps.event.addListener(marker, 'click', function () {
+          setClickedMarker((prev) => {
+            const toggleMarker = !prev[item.id];
+            const newMarkerImgSrc = toggleMarker ? clickedMarkerImgSrc : hotplaceMarkerImgSrc;
+            const newMarkerImage = new kakao.maps.MarkerImage(
+              newMarkerImgSrc,
+              hotplaceMarkerSize,
+              hotplaceMarkerOption
+            );
+            marker.setImage(newMarkerImage);
+            return { ...prev, [item.id]: toggleMarker };
+          });
+
           if (customInfoOverlay.getMap()) {
             customInfoOverlay.setMap(null);
           } else {
@@ -81,10 +94,10 @@ function KakaoMap() {
   };
   return (
     <>
-      <div className='flex w-3/4 h-[50px] mx-auto bg-lime-300'>
+      <div className='flex w-3/4 h-[50px] mx-auto '>
         <MapController handlePlaceSelect={handlePlaceSelect} />
       </div>
-      <div className=' bg-point flex   items-center justify-center  w-3/4 h-[480px] rounded-sm border border-solid border-[3px] border-black mx-auto'>
+      <div className=' bg-point flex items-center  w-3/4 h-[480px] rounded-sm  border-solid border-[3px] border-black mx-auto'>
         <div id='map' ref={mapContainer} className='w-full h-full'></div>
       </div>
     </>
