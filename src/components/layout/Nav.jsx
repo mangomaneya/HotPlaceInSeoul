@@ -2,7 +2,7 @@ import { PATH } from '@/constants/path-constant';
 import useLogout from '@hooks/useLogout';
 import useAuthStore from '@/store/zustand/authStore';
 import { Link } from 'react-router-dom';
-const { LOGIN, SIGN_UP, HOME } = PATH;
+const { LOGIN, SIGN_UP, BOOK_MARK } = PATH;
 
 const publicMenu = () => [
   {
@@ -22,7 +22,7 @@ const privateMenu = (btnEventFunc) => [
   {
     name: '북마크',
     type: 'link',
-    path: HOME,
+    path: BOOK_MARK,
   },
   {
     name: '로그아웃',

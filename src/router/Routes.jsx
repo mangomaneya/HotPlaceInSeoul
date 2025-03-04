@@ -5,6 +5,8 @@ import Home from '@/pages/Home';
 import ProtectedRouter from '@router/ProtectedRouter';
 import SignUp from '@/pages/SignUp';
 import Login from '@/pages/Login';
+import BookMark from '@/pages/BookMark';
+import NotFoundedPage from '@/pages/NotFoundedPage';
 const { LOGIN, SIGN_UP, HOME, BOOK_MARK } = PATH;
 
 function Routes() {
@@ -20,9 +22,8 @@ function Routes() {
           element: <ProtectedRouter />,
           children: [
             {
-              //로그인해야만 갈수있는 경로
               path: BOOK_MARK,
-              element: <BOOK_MARK />,
+              element: <BookMark />, //북마크 페이지 경로 추가 
             },
           ],
         },
@@ -34,6 +35,10 @@ function Routes() {
           path: LOGIN,
           element: <Login />,
         },
+        {
+          path:'*',
+          element: <NotFoundedPage/>
+        }
       ],
     },
   ];
