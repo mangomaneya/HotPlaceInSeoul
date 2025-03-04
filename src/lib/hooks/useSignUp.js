@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signUpValidate } from '@utils/signUpValidate';
 import supabase from '@api/supabaseAPI';
+import useAuthStore from '@store/zustand/authStore';
+import { openAlert } from '@utils/openAlert';
+import { ALERT_TYPE } from '@constants/alert-constant';
 
 const errorMessageText = {
   DUPLICATED: '중복 체크를 해주세요.',
@@ -26,7 +29,10 @@ export default function useSignUp() {
   });
 
   const [isDuplicateChecked, setIsDuplicateChecked] = useState({ email: false });
+  // const login = useAuthStore((state) => state.login);
   const navigate = useNavigate();
+
+  const { SUCCESS, ERROR } = ALERT_TYPE;
 
   function signUpChangeHandler(e) {
     const { name, value } = e.target;
@@ -64,15 +70,15 @@ export default function useSignUp() {
   async function signUpSubmitHandler(e) {
     e.preventDefault();
 
-    {
-      /* TODO: 에러처리 구현 */
-    }
     if (!isValidForm()) {
-      console.error('is Not Valid');
+      openAlert({
+        type: ERROR,
+        text: '잘못 입력된 정보가 있습니다! 다시 한 번 확인해주세요!',
+      });
       return;
     }
 
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: signUpFormData.email,
       password: signUpFormData.password,
       options: {
@@ -82,20 +88,17 @@ export default function useSignUp() {
       },
     });
 
-    console.log(data);
-
-    {
-      /* TODO: 에러처리 구현 */
-    }
     if (error) {
-      console.error(error);
+      openAlert({
+        type: ERROR,
+        text: `서버 오류! 잠시후 다시 요청 바랍니다!`,
+      });
       return;
     }
 
-    {
-      /* 회원가입 성공 
-      TODO: 로그인 정보 상태관리, data 안에 accessToken 있습니다! */
-    }
+    openAlert({ type: SUCCESS, text: '회원가입을 완료했습니다. 자동으로 로그인됩니다.' });
+    //로그인 주석
+    // login(data.session.access_token, data.user.id, data.user.user_metadata.nickname);
     navigate('/');
   }
 

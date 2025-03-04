@@ -6,7 +6,8 @@
       "@pages/*": ["src/pages/*"],
       "@components/*": ["src/components/*"],
       "@router/*": ["src/router/*"],
-      "@data/*": ["src/data/*"],
+      "@constants/*": ["src/constants/*"],
+      "@store/*": ["src/store/*"],
       "@utils/*": ["src/lib/utils/*"],
       "@api/*": ["src/lib/api/*"],
       "@hooks/*": ["src/lib/hooks/*"]
