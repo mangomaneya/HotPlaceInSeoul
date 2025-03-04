@@ -8,7 +8,8 @@ function KakaoMap() {
   // const map = useRef(null); // 지도 객체
   const [markerData, setMarkerData] = useState([]);
   const [mapCenter, setMapCenter] = useState({ lat: 37.5487477114048, lon: 127.04589900432654 });
-  const [clickedMarker, setClickedMarker] = useState({});
+  const [clickedMarker, setClickedMarker] = useState({}); // toggle여부를 위한 상태
+  const [selectedMarker, setSelectedMarker] = useState(null);
   //supabase의 데이터 호출부
   useEffect(() => {
     const handlemarkerData = async () => {
@@ -47,7 +48,7 @@ function KakaoMap() {
 
         const isMarkerClicked = clickedMarker[item.id] || false;
         const markerImgSrc = isMarkerClicked ? clickedMarkerImgSrc : hotplaceMarkerImgSrc;
-        const hotplaceMarkerSize = new kakao.maps.Size(20, 40);
+        const hotplaceMarkerSize = new kakao.maps.Size(25, 45);
         const hotplaceMarkerOption = { offset: new kakao.maps.Point(20, 40) };
         //커스텀 오버레이 마커 생성
         const hotplaceMarker = new kakao.maps.MarkerImage(markerImgSrc, hotplaceMarkerSize, hotplaceMarkerOption);
