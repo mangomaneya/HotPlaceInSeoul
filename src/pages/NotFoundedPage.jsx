@@ -12,7 +12,10 @@ function NotFoundedPage() {
       </header>
       <main className='mt-[100px]'>
         <section>
-          <button onClick={() => navigate(HOME)} className='text-[20px]'>
+          <button
+            onClick={() => navigate(HOME)}
+            className='text-[20px] w-[200px] h-[50px] border rounded-md bg-button text-text-primary hover:bg-point-active hover:text-text-light transition duration-300'
+          >
             홈으로 돌아가기
           </button>
         </section>
