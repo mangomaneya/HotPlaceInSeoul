@@ -48,7 +48,7 @@ const BookMark = () => {
           </div>
         ))}
       </div>
-      {selectPost && <DetailModal id={selectPost} />}
+      {selectPost && <DetailModal id={selectPost} setSelectPost={setSelectPost} />}
     </div>
   );
 };
