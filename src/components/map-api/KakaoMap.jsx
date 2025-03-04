@@ -60,7 +60,7 @@ function KakaoMap() {
                     <div class="bg-orange-500 w-[200px] p-4 rounded-md shadow-lg text-white">
             <h3 class="font-bold">${item.name}</h3>
             <p>${item.area}</p>
-            <button id="detail-btn-${item.id}" class="bg-lime-300 px-2 py-1 mt-2 text-white rounded-md w-full">
+            <button id="detail-btn-${item.id}" class="bg-lime-600 px-2 py-1 mt-2 text-white rounded-md w-full">
               자세히 보기
             </button>
           </div>
@@ -146,11 +146,11 @@ function KakaoMap() {
     setMapCenter(lat, lon);
   };
   return (
-    <div className='flex flex-col w-[1200px] '>
-      <div className='flex w-full h-[50px] mx-auto bg-lime-500 '>
+    <div className='flex flex-col w-[1100px] '>
+      <div className='flex w-full h-[50px] mx-auto mb-4'>
         <MapController handlePlaceSelect={handlePlaceSelect} />
       </div>
-      <div className='flex w-full h-[480px]'>
+      <div className='flex w-full h-[480px] border-lime-300  rounded-md'>
         <div id='map' ref={mapContainer} className='w-full h-full'></div>
         {isDetailModalOpen && selectedMarker && (
           <DetailModal id={selectedMarker.id} closeModal={() => setIsDetailModalOpen(false)} />
