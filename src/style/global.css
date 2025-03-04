@@ -4,7 +4,7 @@
 
 body {
   color: theme('colors.text-primary');
-  font-family: 'Pretendard';
+  font-family: theme('fontFamily.pre');
 }
 
 .flexCenter {
