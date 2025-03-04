@@ -72,8 +72,11 @@ function KakaoMap() {
           setClickedMarker((prev) => {
             const toggleMarker = !prev[item.id];
             const newMarkerSize = new kakao.maps.Size(40, 75);
+            const newMarkerOffset = new kakao.maps.Point(28, 70);
             const newMarkerImgSrc = toggleMarker ? clickedMarkerImgSrc : hotplaceMarkerImgSrc;
-            const newMarkerImage = new kakao.maps.MarkerImage(newMarkerImgSrc, newMarkerSize, hotplaceMarkerOption);
+            const newMarkerImage = new kakao.maps.MarkerImage(newMarkerImgSrc, newMarkerSize, {
+              offset: newMarkerOffset,
+            });
             marker.setImage(newMarkerImage);
             return { ...prev, [item.id]: toggleMarker };
           });
