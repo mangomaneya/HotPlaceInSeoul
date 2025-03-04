@@ -1,3 +1,5 @@
+import Error from '@/components/common/Error';
+import Loading from '@/components/common/Loading';
 import DetailModal from '@/components/modal/detail-modal';
 import { STORE_CONSTANT } from '@/constants/store-constant';
 import { useGetBookmarks } from '@/lib/queries/GetBookmarks';
@@ -12,11 +14,11 @@ const BookMark = () => {
   const userNickName = userData.userNickname;
 
   if (isPending) {
-    return <div>로딩 중...</div>;
+    return <Loading />;
   }
 
   if (isError) {
-    <div>에러가 발생했습니다.</div>;
+    return <Error />;
   }
 
   function closeModal() {
