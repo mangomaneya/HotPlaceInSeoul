@@ -42,7 +42,7 @@ const DETAIL_LIST = [
 ];
 
 //TODO: props로 리스트에서 타겟팅한 가게의 id 받아오기 , 혹시 모달 밖에 클릭했을 때 닫히는 이벤트 구현한다면 onClose 상태도 같이 받아오기 & 이벤트 버블링 막아서 처리하기
-export default function DetailModal() {
+export default function DetailModal({ id, closeModal }) {
   //TODO: user정보 받아와서 bookmark 여부 확인 후 초기값으로 넣어주기
   const [isBookMarked, setIsBookMarked] = useState(false);
 
@@ -53,20 +53,20 @@ export default function DetailModal() {
   };
 
   return (
-    <section className='modal fixedCenter flex flex-col justify-evenly'>
+    <section className='flex flex-col modal fixedCenter justify-evenly'>
       <p className='h-[80%] md:h-[65%] max-h-[400px] mb-5'>
         <img
           src={STORE_MOCK_DATA[STORE_PIC]}
           alt={STORE_MOCK_DATA[STORE_NAME]}
           className='object-cover w-full h-full rounded-lg'
         />
-        <span className='text-text-primary absolute top-2 right-2 text-2xl cursor-pointer '>
+        <span onClick={closeModal} className='absolute text-2xl cursor-pointer text-text-primary top-2 right-2 '>
           <IoCloseOutline />
         </span>
       </p>
 
       <div className='flexCenter !justify-between  mb-[10px]'>
-        <h4 className='font-bold text-2xl sm:text-3xl text-accent-active'>{STORE_MOCK_DATA[STORE_NAME]}</h4>
+        <h4 className='text-2xl font-bold sm:text-3xl text-accent-active'>{STORE_MOCK_DATA[STORE_NAME]}</h4>
         <span className='text-2xl cursor-pointer' onClick={addToBookmark}>
           {isBookMarked ? <FaBookmark className='text-accent' /> : <FaRegBookmark className='text-accent' />}
         </span>
@@ -81,7 +81,7 @@ export default function DetailModal() {
         ))}
       </dl>
       <button className='modalBtn'>
-        <FaYoutube className='text-4xl w-full text-white' />
+        <FaYoutube className='w-full text-4xl text-white' />
       </button>
     </section>
   );

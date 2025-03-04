@@ -30,6 +30,7 @@ function KakaoMap() {
         setMarkerData(data);
       } catch (error) {
         openAlert({ type: ERROR, text: '데이터 로드에 실패했습니다' });
+        console.log(error);
       } finally {
         setDataLoading(false);
       }
@@ -53,6 +54,20 @@ function KakaoMap() {
         openAlert({ type: ERROR, text: '마커 데이터를 불러오는데 실패했습니다, 새로고침해주세요' });
         return;
       }
+
+      const makeCustomOverlay = ({ item }) => {
+        const overlayContent = document.createElement('div');
+        overlayContent.innerHTML = `
+                    <div class="bg-orange-500 w-[200px] p-4 rounded-md shadow-lg text-white">
+            <h3 class="font-bold">${item.name}</h3>
+            <p>${item.area}</p>
+            <button id="detail-btn-${item.id}" class="bg-lime-300 px-2 py-1 mt-2 text-white rounded-md w-full">
+              자세히 보기
+            </button>
+          </div>
+        `;
+        return overlayContent;
+      };
 
       markerData.forEach((item) => {
         //지도 마커 좌표 설정
@@ -81,18 +96,8 @@ function KakaoMap() {
         });
 
         //커스텀 오버레이 내부 요소
-        const overlayContent = document.createElement('div');
-        overlayContent.innerHTML = `
-                    <div class="bg-orange-500 w-[200px] p-4 rounded-md shadow-lg text-white">
-            <h3 class="font-bold">${item.name}</h3>
-            <p>${item.area}</p>
-            <button id="detail-btn-${item.id}" class="bg-lime-300 px-2 py-1 mt-2 text-white rounded-md w-full">
-              자세히 보기
-            </button>
-          </div>
-        `;
-
-        //커스텀 오버레이 호출
+        const overlayContent = makeCustomOverlay({ item });
+        //커스텀 오버레이 호출]
         const customInfoOverlay = new kakao.maps.CustomOverlay({
           content: overlayContent,
           removable: true,
@@ -103,6 +108,7 @@ function KakaoMap() {
         //커스텀 오버레이 이벤트 등록록
         overlayContent.querySelector(`#detail-btn-${item.id}`).addEventListener('click', () => {
           setSelectedMarker({ id: item.id, name: item.name, area: item.area });
+          setIsDetailModalOpen(true);
         });
 
         //이벤트 등록
