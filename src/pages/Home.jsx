@@ -1,12 +1,11 @@
+import HotplaceList from '@/components/HotplaceList/HotplaceList';
 import KakaoMap from '@/components/map-api/KakaoMap';
-import DetailModal from '@/components/modal/detail-modal';
-import YoutubeModal from '@/components/modal/youtube-modal';
+
 export default function Home() {
   return (
-    <div className='flex flex-col'>
-      <KakaoMap />
-      {/* <DetailModal /> */}
-      {/* <YoutubeModal /> */}
+    <div className='flex justify-around '>
+      <KakaoMap className='flex-auto' />
+      <HotplaceList className='w-1/3' />
     </div>
   );
 }

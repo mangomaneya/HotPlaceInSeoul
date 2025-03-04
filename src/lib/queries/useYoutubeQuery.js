@@ -1,5 +1,6 @@
+import { QUERY_KEYS } from '@/constants/query-keys';
 import { useQuery } from '@tanstack/react-query';
-
+const { YOUTUBE } = QUERY_KEYS;
 const YOUTUBE_BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 const API_KEY = import.meta.env.VITE_YOUTUBE_KEY;
 const REQUEST_NUM_OF_YOUTUBE_LIST = 3; // 받아올 게시글의 개수
@@ -55,7 +56,7 @@ export const useYoutubeQuery = ({ storeId, area, storeName }) => {
     isError,
     error,
   } = useQuery({
-    queryKey: ['youtube', storeId],
+    queryKey: [YOUTUBE, storeId],
     queryFn: getYoutubeData,
     staleTime: 1000 * 60 * 180, //3시간
     refetchOnMount: false,
