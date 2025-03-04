@@ -7,7 +7,8 @@ const BookMark = () => {
   const { data: bookmarkList = [], isPending, isError } = useGetBookmarks();
   const booksNum = bookmarkList.length;
   const [selectPost, setSelectPost] = useState(null);
-  const userNickName = bookmarkList[0].users.nickname;
+  const token = JSON.parse(localStorage.getItem('sb-frzxflvdpgomgaanvqyf-auth-token')) || null;
+  const userNickName = token?.user?.user_metadata?.nickname || 'Guest'; // 토큰으로 비교하여 로그인하지 않은 사용자는 게스트처리
 
   if (isPending) {
     return <div>로딩 중...</div>;

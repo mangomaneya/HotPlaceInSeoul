@@ -2,8 +2,16 @@ import supabase from '@api/supabaseAPI';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetBookmarks = () => {
+  const token = JSON.parse(localStorage.getItem('sb-frzxflvdpgomgaanvqyf-auth-token')) || null;
+  const userId = token?.user?.id; // 현재 로그인 한 사용자의 ID
+
   const getBookmarks = async () => {
-    const { data, error } = await supabase.from('bookmarks').select('*, users(id, nickname), hotplaces(name, img_url)');
+    if (!userId) return [];
+
+    const { data, error } = await supabase
+      .from('bookmarks')
+      .select('*, users(nickname), hotplaces(name, img_url)')
+      .eq('user_id', userId); // 현재 로그인 한 사용자의 북마크 리스트
     if (error) {
       throw new Error(error.message);
     }
@@ -13,5 +21,6 @@ export const useGetBookmarks = () => {
   return useQuery({
     queryKey: ['bookmarks'],
     queryFn: getBookmarks,
+    enabled: !!userId,
   });
 };
