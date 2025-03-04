@@ -6,7 +6,10 @@ export default function SignUpForm() {
     useSignUp();
 
   return (
-    <form onSubmit={signUpSubmitHandler} className='flex flex-col w-[350px] px-[5px]'>
+    <form
+      onSubmit={signUpSubmitHandler}
+      className='flex flex-col h-[450px] w-[400px] py-[30px] px-[30px] border-[1px] shadow-md rounded-md justify-between'
+    >
       <div className='mb-[10px]'>
         <div className='flex gap-[10px] justify-between items-end'>
           <InputForm
