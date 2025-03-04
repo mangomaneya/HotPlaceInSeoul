@@ -7,5 +7,6 @@
   "arrowParens": "always",
   "printWidth": 120,
   "useTabs": false,
-  "bracketSpacing": true
+  "bracketSpacing": true,
+  "quoteProps": "preserve"
 }

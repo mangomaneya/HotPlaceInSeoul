@@ -9,6 +9,7 @@ import ProtectedRouter from '@router/ProtectedRouter';
 import NotFoundedPage from '@/pages/NotFoundedPage';
 const { LOGIN, SIGN_UP, HOME, BOOK_MARK } = PATH;
 
+
 export default function Router() {
   return (
     <BrowserRouter>
