@@ -1,8 +1,8 @@
 import { STORE_CONSTANT } from '@/constants/store-constant';
 import { useGetHotplaces } from '@/lib/queries/GetHotplaces';
 import { useState } from 'react';
-import DetailModal from '../modal/detail-modal';
-import YoutubeModal from '../modal/youtube-modal';
+import DetailModal from '@/components/modal/detail-modal';
+import YoutubeModal from '@/components/modal/youtube-modal';
 
 const HotplaceList = () => {
   const [isVisible, setIsVisible] = useState(false);
