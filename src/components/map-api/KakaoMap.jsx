@@ -41,7 +41,10 @@ function KakaoMap() {
       };
       const map = new kakao.maps.Map(mapContainer.current, options);
       //지도생성
-
+      if (markerData.length === 0) {
+        openAlert({ ERROR, text: '마커 데이터를 불러오는데 실패했습니다, 새로고침해주세요' });
+        return;
+      }
       markerData.forEach((item) => {
         const name = item.name;
         const lat = parseFloat(item.latitude);
