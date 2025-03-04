@@ -22,7 +22,7 @@ export const useBookmarkQuey = ({ storeId }) => {
     queryKey: [BOOKMARKS, userId, storeId],
     queryFn: getUserBookmark,
     staleTime: 1000 * 60 * 10,
-    cacheTime: 1000 * 60 * 30,
+    cacheTime: 1000 * 60 * 10,
   });
 
   return {
