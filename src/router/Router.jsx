@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from '@components/layout/Layout';
 import { PATH } from '@constants/path-constant';
 import Home from '@pages/Home';
-import BookMark from '@/pages/BookMark/BookMark';
+import BookMark from '@/pages/BookMark';
 import Login from '@/pages/Login';
 import SignUp from '@/pages/SignUp';
 const { LOGIN, SIGN_UP, BOOK_MARK } = PATH;
