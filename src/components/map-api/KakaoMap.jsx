@@ -6,7 +6,6 @@ import { openAlert } from '@/lib/utils/openAlert';
 import { ALERT_TYPE } from '@/constants/alert-constant';
 import useAreaStore from '@/store/zustand/useAreaStore';
 import DetailModal from '../modal/detail-modal';
-
 const { ERROR } = ALERT_TYPE;
 function KakaoMap() {
   const mapContainer = useRef(null); //지도 컨테이너

@@ -1,4 +1,4 @@
-export const STORE_CONSTANT = {
+export const STORE_CONSTANT = Object.freeze({
   STORE_NAME: 'name',
   STORE_ADDRESS: 'address_road_name',
   STORE_CONTACT: 'contact_number',

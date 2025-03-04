@@ -20,6 +20,10 @@ const HotplaceList = () => {
     return <div>에러가 발생했습니다.</div>;
   }
 
+  function closeModal() {
+    setSelectedPost(null);
+  }
+
   document.body.style.overflow = isVisible ? 'hidden' : 'auto';
 
   return (
@@ -47,7 +51,7 @@ const HotplaceList = () => {
       <button onClick={toggleHotPlaceList} className='fixed p-2 w-[250px] bg-button bottom-0 border-2 rounded-t-2xl'>
         {isVisible ? '핫플 닫기' : '핫플 보기'}
       </button>
-      {selectedPost && <DetailModal id={selectedPost} />}
+      {selectedPost && <DetailModal id={selectedPost} closeModal={closeModal} />}
     </article>
   );
 };
