@@ -146,11 +146,11 @@ function KakaoMap() {
     setMapCenter(lat, lon);
   };
   return (
-    <div className='w-[1024px]'>
-      <div className='flex w-full h-[50px] mx-auto bg-lime-500'>
+    <div className='flex flex-col w-[1200px] '>
+      <div className='flex w-full h-[50px] mx-auto bg-lime-500 '>
         <MapController handlePlaceSelect={handlePlaceSelect} />
       </div>
-      <div className='w-[1024px] h-[480px]'>
+      <div className='flex w-full h-[480px]'>
         <div id='map' ref={mapContainer} className='w-full h-full'></div>
         {isDetailModalOpen && selectedMarker && (
           <DetailModal id={selectedMarker.id} closeModal={() => setIsDetailModalOpen(false)} />
