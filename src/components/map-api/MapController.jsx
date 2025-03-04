@@ -23,9 +23,11 @@ export default function MapController({ handlePlaceSelect }) {
         value={coordinate}
         onChange={handleSelect}
       >
-        <option value='성수동'>성수동</option>
-        <option value='인사/낙원'>인사/낙원</option>
-        <option value='망원동'>망원동</option>
+        {Object.entries(locationCoords).map(([key]) => (
+          <option key={key} value={key}>
+            {key}
+          </option>
+        ))}
       </select>
       <button className='text-xl w-[200px] h-[40px] rounded-md bg-button text-accent '>목록</button>
     </div>
