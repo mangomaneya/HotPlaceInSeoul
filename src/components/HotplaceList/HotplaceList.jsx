@@ -4,11 +4,13 @@ import DetailModal from '../modal/detail-modal';
 import { STORE_CONSTANT } from '@/constants/store-constant';
 import Loading from '../common/Loading';
 import Error from '../common/Error';
+import useAreaStore from '@/store/zustand/useAreaStore';
 
 const HotplaceList = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
-  const { data: hotplaces = [], isPending, isError } = useGetHotplaces();
+  const selectedArea = useAreaStore((state) => state.selectedArea);
+  const { data: hotplaces = [], isPending, isError } = useGetHotplaces({ area: selectedArea });
 
   function toggleHotPlaceList() {
     setIsVisible((prev) => !prev);
