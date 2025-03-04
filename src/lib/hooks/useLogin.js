@@ -11,7 +11,7 @@ export default function useLogin() {
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
   // const login = useAuthStore((state) => state.login);
 
-  const redirectedFrom = useLocation()?.state?.redirectedFrom || '/';
+  const redirectedFrom = useLocation()?.state?.from || '/';
   const navigate = useNavigate();
   const redirectPath = redirectedFrom === '/login' ? '/' : redirectedFrom;
 
