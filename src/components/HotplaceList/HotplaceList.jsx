@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useGetHotplaces } from '@/lib/queries/GetHotplaces';
 import DetailModal from '../modal/detail-modal';
 import { STORE_CONSTANT } from '@/constants/store-constant';
+import Loading from '../common/Loading';
+import Error from '../common/Error';
 
 const HotplaceList = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -13,11 +15,11 @@ const HotplaceList = () => {
   }
 
   if (isPending) {
-    return <div>로딩 중...</div>;
+    return <Loading />;
   }
 
   if (isError) {
-    return <div>에러가 발생했습니다.</div>;
+    return <Error />;
   }
 
   function closeModal() {
