@@ -1,16 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
-// import { positions } from './boundary'; 마커 표시 임시 데이터터
+// import { positions } from './boundary'; 마커 표시 임시 데이터
 import supabase from '../../lib/api/supabaseAPI';
 import MapController from './MapController';
-import MarkerInfo from './markerInfo';
 import { openAlert } from '@/lib/utils/openAlert';
 import { ALERT_TYPE } from '@/constants/alert-constant';
 import YoutubeModal from '../modal/youtube-modal';
 import DetailModal from '../modal/detail-modal';
 const { ERROR } = ALERT_TYPE;
-function KakaoMap() {
+function KakaoMap({ selectedArea }) {
   const mapContainer = useRef(null); //지도 컨테이너
-  // const map = useRef(null); // 지도 객체
   const [markerData, setMarkerData] = useState([]);
   const [mapCenter, setMapCenter] = useState({ lat: 37.5487477114048, lon: 127.04589900432654 });
   const [clickedMarker, setClickedMarker] = useState({}); // toggle여부를 위한 상태
@@ -57,26 +55,28 @@ function KakaoMap() {
         const name = item.name;
         const uniqueId = item.id;
         const area = item.area;
+        //지도 마커 좌표 설정정
         const lat = parseFloat(item.latitude);
         const lon = parseFloat(item.longitude);
         const markerPosition = new kakao.maps.LatLng(lat, lon);
+
         //커스텀 오버레이 설정 변수
         const clickedMarkerImgSrc = '/activeMarker.svg';
         const hotplaceMarkerImgSrc = '/hotplaceMarker.svg';
-
         const isMarkerClicked = clickedMarker[item.id] || false;
         const markerImgSrc = isMarkerClicked ? clickedMarkerImgSrc : hotplaceMarkerImgSrc;
         const hotplaceMarkerSize = new kakao.maps.Size(25, 45);
         const hotplaceMarkerOption = { offset: new kakao.maps.Point(20, 40) };
+
         //커스텀 오버레이 마커 생성
         const hotplaceMarker = new kakao.maps.MarkerImage(markerImgSrc, hotplaceMarkerSize, hotplaceMarkerOption);
-
         const marker = new kakao.maps.Marker({
           map: map,
           position: markerPosition,
           image: hotplaceMarker,
         });
 
+        //커스텀 오버레이 내부 요소
         const overlayContent = document.createElement('div');
         overlayContent.innerHTML = `
                     <div class="bg-orange-500 w-[200px] p-4 rounded-md shadow-lg text-white">
@@ -88,6 +88,7 @@ function KakaoMap() {
           </div>
         `;
 
+        //커스텀 오버레이 호출
         const customInfoOverlay = new kakao.maps.CustomOverlay({
           content: overlayContent,
           removable: true,
@@ -95,6 +96,7 @@ function KakaoMap() {
           yAnchor: 2,
           zIndex: 3,
         });
+        //커스텀 오버레이 이벤트 등록록
         overlayContent.querySelector(`#detail-btn-${item.id}`).addEventListener('click', () => {
           setSelectedMarker({ id: item.id, name: item.name, area: item.area });
           setIsYoutubeModalOpen(true);
