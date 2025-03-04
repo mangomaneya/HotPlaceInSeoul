@@ -33,7 +33,6 @@ export default function MapController() {
           </option>
         ))}
       </select>
-      <button className='text-xl w-[200px] h-[40px] rounded-md bg-button text-accent '>목록</button>
     </div>
   );
 }

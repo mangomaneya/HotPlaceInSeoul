@@ -1,23 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useGetHotplaces } from '@/lib/queries/GetHotplaces';
 import DetailModal from '../modal/detail-modal';
 import { STORE_CONSTANT } from '@/constants/store-constant';
-import useAreaStore from '@/store/zustand/useAreaStore';
+
 const HotplaceList = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
   const { data: hotplaces = [], isPending, isError } = useGetHotplaces();
-  const selectedArea = useAreaStore((state) => state.selectedArea);
-  const [hotplaceList, setHotPlaceList] = useState([]);
-
-  useEffect(() => {
-    if (selectedArea) {
-      const filteredHotplaces = hotplaces.filter((data) => data[STORE_CONSTANT.AREA] === selectedArea);
-      setHotPlaceList(filteredHotplaces);
-    } else {
-      setHotPlaceList([]);
-    }
-  }, [selectedArea, hotplaces]);
 
   function toggleHotPlaceList() {
     setIsVisible((prev) => !prev);
@@ -37,7 +26,7 @@ const HotplaceList = () => {
     <article className='m-3 w-[250px] overflow-y-auto h-[80vh]'>
       {isVisible && (
         <div className='slide-up opacity-100 transition-opacity duration-300 bg-neutral-50 w-[250px] pb-[50px]'>
-          {hotplaceList.map((data) => (
+          {hotplaces.map((data) => (
             <section
               key={data.id}
               onClick={() => setSelectedPost(data.id)}
