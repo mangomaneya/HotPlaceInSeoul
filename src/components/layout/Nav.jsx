@@ -1,7 +1,8 @@
 import { PATH } from '@/constants/path-constant';
+import useLogout from '@hooks/useLogout';
+import useAuthStore from '@/store/zustand/authStore';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-const { LOGIN, SIGN_UP } = PATH;
+const { LOGIN, SIGN_UP, HOME } = PATH;
 
 const publicMenu = () => [
   {
@@ -16,23 +17,35 @@ const publicMenu = () => [
   },
 ];
 
+//로그인 되어야만 이동 가능한 경로
 const privateMenu = (btnEventFunc) => [
+  {
+    name: '북마크',
+    type: 'link',
+    path: HOME,
+  },
   {
     name: '로그아웃',
     type: 'button',
-    btnEven: btnEventFunc,
+    btnEvent: btnEventFunc,
   },
 ];
 
 export default function Nav() {
-  const isLogin = false; //TODO: 로그인 연결되면 수정하기
-  const navigate = useNavigate();
+  const setUserData = useAuthStore((state) => state.setUserData);
+  const handleLogout = useLogout();
 
-  const moveToHome = () => {
-    navigate('/', { replace: true });
-  };
+  //로그인 여부를 토큰 키값 유무로 지정
+  const token = JSON.parse(localStorage.getItem('sb-frzxflvdpgomgaanvqyf-auth-token')) || null;
+  const isAuthenticated = !!token;
+  if (isAuthenticated) {
+    const { user, access_token } = token;
+    const { user_metadata } = user;
+    //전역상태 유저정보 세팅
+    setUserData(access_token, user.id, user_metadata.email, user_metadata.nickname);
+  }
 
-  const navMenu = isLogin ? privateMenu(moveToHome) : publicMenu();
+  const navMenu = isAuthenticated ? privateMenu(handleLogout) : publicMenu();
 
   return (
     <nav>
@@ -42,7 +55,7 @@ export default function Nav() {
             {menu.type === 'link' ? (
               <Link to={menu.path}>{menu.name}</Link>
             ) : (
-              <button onClick={menu.btnEven}>{menu.name}</button>
+              <button onClick={menu.btnEvent}>{menu.name}</button>
             )}
           </li>
         ))}
