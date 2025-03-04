@@ -4,7 +4,8 @@ import supabase from '../../lib/api/supabaseAPI';
 import MapController from './MapController';
 import MarkerInfo from './markerInfo';
 import { openAlert } from '@/lib/utils/openAlert';
-import { es2015 } from 'globals';
+import { ALERT_TYPE } from '@/constants/alert-constant';
+const { ERROR } = ALERT_TYPE;
 function KakaoMap() {
   const mapContainer = useRef(null); //지도 컨테이너
   // const map = useRef(null); // 지도 객체
@@ -22,7 +23,7 @@ function KakaoMap() {
         }
         setMarkerData(data);
       } catch (error) {
-        openAlert({ type: error, text: '데이터 로드에 실패했습니다' });
+        openAlert({ type: ERROR, text: '데이터 로드에 실패했습니다', error });
       }
     };
     handlemarkerData();
@@ -99,7 +100,7 @@ function KakaoMap() {
         });
       });
     } else {
-      openAlert({ type: Error, text: '마커 데이터 로드를 실패했습니다' });
+      openAlert({ type: ERROR, text: '마커 데이터 로드를 실패했습니다' });
     }
   }, [markerData, mapCenter]);
   const handlePlaceSelect = (lat, lon) => {
