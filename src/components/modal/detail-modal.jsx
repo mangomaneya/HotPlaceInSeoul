@@ -61,7 +61,7 @@ export default function DetailModal({ id: storeId, closeModal }) {
   if (isError) return <Error isOpenErrorAlert={true} errorMessage={isError ? error.message : mutateError} />;
 
   return (
-    <section className='modal fixedCenter flex flex-col justify-evenly'>
+    <section className='flex flex-col modal fixedCenter justify-evenly'>
       <p className='max-h-[400px] md:max-h-[65%] mb-5'>
         <img
           src={storeData[STORE_PIC]}
@@ -69,11 +69,11 @@ export default function DetailModal({ id: storeId, closeModal }) {
           className='object-cover w-full max-h-[400px] rounded-lg'
         />
       </p>
-      <span className='text-text-primary absolute top-2 right-2 text-2xl cursor-pointer' onClick={closeModal}>
+      <span className='absolute text-2xl cursor-pointer text-text-primary top-2 right-2' onClick={closeModal}>
         <IoCloseOutline />
       </span>
       <div className='flexCenter !justify-between  mb-[10px]'>
-        <h4 className='font-bold text-2xl sm:text-3xl text-accent-active'>{storeData[STORE_NAME]}</h4>
+        <h4 className='text-2xl font-bold sm:text-3xl text-accent-active'>{storeData[STORE_NAME]}</h4>
         <span className='text-2xl cursor-pointer' onClick={handleBookmark}>
           {isBookMarked ? <FaBookmark className='text-accent' /> : <FaRegBookmark className='text-accent' />}
         </span>
@@ -88,7 +88,7 @@ export default function DetailModal({ id: storeId, closeModal }) {
         ))}
       </dl>
       <button className='modalBtn'>
-        <FaYoutube className='text-4xl w-full text-white' />
+        <FaYoutube className='w-full text-4xl text-white' />
       </button>
     </section>
   );
