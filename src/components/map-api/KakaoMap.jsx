@@ -13,13 +13,14 @@ function KakaoMap() {
   //supabase의 데이터 호출부
   useEffect(() => {
     const handlemarkerData = async () => {
-      const { data, error } = await supabase.from('hotplaces').select('*');
-
-      if (error) {
-        console.log('supabase 데이터 호출 에러', error);
-      } else {
+      try {
+        const { data, error } = await supabase.from('hotplaces').select('*');
+        if (error) {
+          throw error;
+        }
         setMarkerData(data);
-        // console.log(data);
+      } catch (error) {
+        alert('데이터 로드에 실패했습니다다', error);
       }
     };
     handlemarkerData();
@@ -43,8 +44,8 @@ function KakaoMap() {
         const lon = parseFloat(item.longitude);
         const markerPosition = new kakao.maps.LatLng(lat, lon);
         //커스텀 오버레이 설정 변수
-        const clickedMarkerImgSrc = '../../../public/activeMarker.svg';
-        const hotplaceMarkerImgSrc = '../../../public/hotplaceMarker.svg';
+        const clickedMarkerImgSrc = '/activeMarker.svg';
+        const hotplaceMarkerImgSrc = '/hotplaceMarker.svg';
 
         const isMarkerClicked = clickedMarker[item.id] || false;
         const markerImgSrc = isMarkerClicked ? clickedMarkerImgSrc : hotplaceMarkerImgSrc;
@@ -70,12 +71,9 @@ function KakaoMap() {
         kakao.maps.event.addListener(marker, 'click', function () {
           setClickedMarker((prev) => {
             const toggleMarker = !prev[item.id];
+            const newMarkerSize = new kakao.maps.Size(40, 75);
             const newMarkerImgSrc = toggleMarker ? clickedMarkerImgSrc : hotplaceMarkerImgSrc;
-            const newMarkerImage = new kakao.maps.MarkerImage(
-              newMarkerImgSrc,
-              hotplaceMarkerSize,
-              hotplaceMarkerOption
-            );
+            const newMarkerImage = new kakao.maps.MarkerImage(newMarkerImgSrc, newMarkerSize, hotplaceMarkerOption);
             marker.setImage(newMarkerImage);
             return { ...prev, [item.id]: toggleMarker };
           });
@@ -88,7 +86,7 @@ function KakaoMap() {
         });
       });
     } else {
-      console.error('카카오맵 API가 로드되지 않았습니다.');
+      alert.error('카카오맵 API가 로드되지 않았습니다.');
     }
   }, [markerData, mapCenter]);
   const handlePlaceSelect = (lat, lon) => {
