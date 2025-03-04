@@ -11,7 +11,6 @@ function KakaoMap() {
   const mapContainer = useRef(null); //지도 컨테이너
   const [markerData, setMarkerData] = useState([]);
   const { mapCenter, setMapCenter } = useAreaStore();
-  // const [mapCenter, setMapCenter] = useState({ lat: 37.5487477114048, lon: 127.04589900432654 });
   const [clickedMarker, setClickedMarker] = useState({}); // toggle여부를 위한 상태
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [dataLoading, setDataLoading] = useState(true);
