@@ -10,6 +10,7 @@ import NotFoundedPage from '@/pages/NotFoundedPage';
 import BookMark from '@/pages/BookMark';
 const { LOGIN, SIGN_UP, HOME, BOOK_MARK } = PATH;
 
+
 export default function Router() {
   return (
     <BrowserRouter>
