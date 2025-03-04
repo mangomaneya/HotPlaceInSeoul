@@ -142,8 +142,8 @@ function KakaoMap() {
       <div className=' bg-point flex items-center  w-3/4 h-[480px] rounded-sm  border-solid border-[3px] border-black mx-auto'>
         <div id='map' ref={mapContainer} className='w-full h-full'></div>
       </div>
-      {isYoutubeModalOpen && selectedMarker && (
-        <DetailModal id={selectedMarker.id} onClose={() => setIsDetailModalOpen(false)} />
+      {isDetailModalOpen && selectedMarker && (
+        <DetailModal id={selectedMarker.id} closeModal={() => setIsDetailModalOpen(false)} />
       )}
     </>
   );
