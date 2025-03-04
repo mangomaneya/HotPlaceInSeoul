@@ -43,12 +43,9 @@ const DETAIL_LIST = [
   },
 ];
 
-//@TODO: store tanstackQuery에서 select를 통해 STORE_ID랑 일치하는 데이터만 뽑아와서 사용
-const STORE_ID = '3239d179-918a-48fb-b3c5-273b776b2c0e';
-//TODO: props로 리스트에서 타겟팅한 가게의 id 받아오기 , onClose 받아오기
-export default function DetailModal() {
-  const { bookmarkData, isError, isPending, error } = useBookmarkQuey({ storeId: STORE_ID });
-  const { addMutate, deleteMutate, isMutatePending, error: mutateError } = useBookmarkMutation({ storeId: STORE_ID });
+export default function DetailModal({ id: storeId, closeModal }) {
+  const { bookmarkData, isError, isPending, error } = useBookmarkQuey({ storeId });
+  const { addMutate, deleteMutate, isMutatePending, error: mutateError } = useBookmarkMutation({ storeId });
   const isBookMarked = bookmarkData?.length > 0;
 
   const handleBookmark = () => {
@@ -75,7 +72,7 @@ export default function DetailModal() {
           alt={STORE_MOCK_DATA[STORE_NAME]}
           className='object-cover w-full h-full rounded-lg'
         />
-        <span className='text-text-primary absolute top-2 right-2 text-2xl cursor-pointer '>
+        <span className='text-text-primary absolute top-2 right-2 text-2xl cursor-pointer' onClick={closeModal}>
           <IoCloseOutline />
         </span>
       </p>
