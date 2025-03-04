@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 // import { positions } from './boundary'; 마커 표시 임시 데이터터
-import supabase from '../../lib/api/supabaseAPI';
-import MapController from './MapController';
-import MarkerInfo from './markerInfo';
-import { openAlert } from '@/lib/utils/openAlert';
-import { ALERT_TYPE } from '@/constants/alert-constant';
+import supabase from '@api/supabaseAPI';
+import MapController from '@components/map-api/MapController';
+import MarkerInfo from '@components/map-api/MarkerInfo';
+import { openAlert } from '@utils/openAlert';
+import { ALERT_TYPE } from '@constants/alert-constant';
 const { ERROR } = ALERT_TYPE;
 function KakaoMap() {
   const mapContainer = useRef(null); //지도 컨테이너
