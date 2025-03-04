@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import supabase from '../../lib/api/supabaseAPI';
 import MapController from './MapController';
 import MarkerInfo from './markerInfo';
+import { openAlert } from '@/lib/utils/openAlert';
+import { es2015 } from 'globals';
 function KakaoMap() {
   const mapContainer = useRef(null); //지도 컨테이너
   // const map = useRef(null); // 지도 객체
@@ -20,7 +22,7 @@ function KakaoMap() {
         }
         setMarkerData(data);
       } catch (error) {
-        alert('데이터 로드에 실패했습니다다', error);
+        openAlert({ type: error, text: '데이터 로드에 실패했습니다' });
       }
     };
     handlemarkerData();
@@ -38,6 +40,7 @@ function KakaoMap() {
       };
       const map = new kakao.maps.Map(mapContainer.current, options);
       //지도생성
+
       markerData.forEach((item) => {
         const name = item.name;
         const lat = parseFloat(item.latitude);
@@ -71,13 +74,20 @@ function KakaoMap() {
         kakao.maps.event.addListener(marker, 'click', function () {
           setClickedMarker((prev) => {
             const toggleMarker = !prev[item.id];
-            const newMarkerSize = new kakao.maps.Size(40, 75);
-            const newMarkerOffset = new kakao.maps.Point(28, 70);
-            const newMarkerImgSrc = toggleMarker ? clickedMarkerImgSrc : hotplaceMarkerImgSrc;
-            const newMarkerImage = new kakao.maps.MarkerImage(newMarkerImgSrc, newMarkerSize, {
-              offset: newMarkerOffset,
-            });
-            marker.setImage(newMarkerImage);
+
+            if (toggleMarker) {
+              marker.setImage(
+                new kakao.maps.MarkerImage(clickedMarkerImgSrc, new kakao.maps.Size(40, 75), {
+                  offset: new kakao.maps.Point(28, 70),
+                })
+              );
+            } else {
+              marker.setImage(
+                new kakao.maps.MarkerImage(hotplaceMarkerImgSrc, new kakao.maps.Size(25, 45), {
+                  offset: new kakao.maps.Point(20, 40),
+                })
+              );
+            }
             return { ...prev, [item.id]: toggleMarker };
           });
 
@@ -89,7 +99,7 @@ function KakaoMap() {
         });
       });
     } else {
-      alert.error('카카오맵 API가 로드되지 않았습니다.');
+      openAlert({ type: Error, text: '마커 데이터 로드를 실패했습니다' });
     }
   }, [markerData, mapCenter]);
   const handlePlaceSelect = (lat, lon) => {
