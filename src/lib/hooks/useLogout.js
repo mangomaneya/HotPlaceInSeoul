@@ -1,6 +1,6 @@
-import supabase from '../api/supabaseAPI';
+import supabase from '@api/supabaseAPI';
 import { useNavigate } from 'react-router-dom';
-import { openAlert } from '../utils/openAlert';
+import { openAlert } from '@utils/openAlert';
 import { ALERT_TYPE } from '@/constants/alert-constant';
 import { PATH } from '@/constants/path-constant';
 import useAuthStore from '@/store/zustand/authStore';

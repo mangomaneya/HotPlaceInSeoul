@@ -5,9 +5,7 @@ const { LOGIN } = PATH;
 
 function ProtectedRouter() {
   const { pathname } = useLocation();
-  const token = useAuthStore((state) => {
-    state.userData.token;
-  });
+  const token = useAuthStore((state) => state.userData.token);
   //로그인 안되어있다면 로그인 페이지로 이동
   if (!token) {
     return <Navigate to={LOGIN} replace state={{ from: pathname }} />;
