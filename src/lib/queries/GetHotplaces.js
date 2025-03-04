@@ -20,9 +20,10 @@ export const useGetHotplaces = ({ area = null }) => {
   };
 
   return useQuery({
-    queryKey: [HOTPLACE, selectedArea],
+    queryKey: selectedArea ? [HOTPLACE, selectedArea] : [HOTPLACE],
     queryFn: getHotplaces,
     select: filterArea,
-    staleTime: 60 * 60 * 1000,
-  }); //1시간
+    staleTime: 60 * 60 * 1000, //1시간
+    enabled: !!selectedArea, // selectedArea가 존재할 때만 실행
+  });
 };
