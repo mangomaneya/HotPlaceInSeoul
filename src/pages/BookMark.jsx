@@ -19,6 +19,10 @@ const BookMark = () => {
   }
   console.log('bookmarkList', bookmarkList);
 
+  function closeModal() {
+    setSelectPost(null);
+  }
+
   return (
     <div>
       <section className='flexCenter pt-[70px]'>
@@ -48,7 +52,7 @@ const BookMark = () => {
           </div>
         ))}
       </div>
-      {selectPost && <DetailModal id={selectPost} setSelectPost={setSelectPost} />}
+      {selectPost && <DetailModal id={selectPost} closeModal={closeModal} />}
     </div>
   );
 };
