@@ -3,20 +3,19 @@ import supabase from '@/lib/api/supabaseAPI';
 import useAreaStore from '@/store/zustand/useAreaStore';
 import { useQuery } from '@tanstack/react-query';
 
-export const useGetHotplaces = ({ area = null }) => {
+export const useGetHotplaces = ({ area = null } = {}) => {
   const { HOTPLACE } = QUERY_KEYS;
   const selectedArea = useAreaStore((state) => state.selectedArea);
   const getHotplaces = async () => {
-    const { data, error } = await supabase.from('hotplaces').select('*').eq('area', selectedArea);
+    const { data, error } = await supabase.from(HOTPLACE).select('*').eq('area', area); // area:현재 지역
     if (error) {
       throw new Error(error.message);
     }
-    return data;
+    return data; // 현재 지역에 해당하는 area를 가진 테이블의 값들을 return
   };
 
   const filterArea = (places) => {
-    const areaFilter = area || selectedArea;
-    return areaFilter ? places.filter((place) => place.area === areaFilter) : places;
+    return places.filter((place) => place.area === selectedArea);
   };
 
   return useQuery({
