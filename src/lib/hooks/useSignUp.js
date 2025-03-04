@@ -29,7 +29,7 @@ export default function useSignUp() {
   });
 
   const [isDuplicateChecked, setIsDuplicateChecked] = useState({ email: false });
-  const login = useAuthStore((state) => state.login);
+  // const login = useAuthStore((state) => state.login);
   const navigate = useNavigate();
 
   const { SUCCESS, ERROR } = ALERT_TYPE;
@@ -78,7 +78,7 @@ export default function useSignUp() {
       return;
     }
 
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: signUpFormData.email,
       password: signUpFormData.password,
       options: {
@@ -96,9 +96,9 @@ export default function useSignUp() {
       return;
     }
 
-    //로그인 처리
     openAlert({ type: SUCCESS, text: '회원가입을 완료했습니다. 자동으로 로그인됩니다.' });
-    login(data.session.access_token, data.user.id, data.user.user_metadata.nickname);
+    //로그인 주석
+    // login(data.session.access_token, data.user.id, data.user.user_metadata.nickname);
     navigate('/');
   }
 

@@ -5,10 +5,11 @@ import useAuthStore from '@store/zustand/authStore';
 import { openAlert } from '@utils/openAlert';
 import { ALERT_TYPE } from '@constants/alert-constant';
 
+
 export default function useLogin() {
   const [loginState, setLoginState] = useState({ email: '', password: '' });
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
-  const login = useAuthStore((state) => state.login);
+  // const login = useAuthStore((state) => state.login);
 
   const redirectedFrom = useLocation()?.state?.redirectedFrom || '/';
   const navigate = useNavigate();
@@ -23,14 +24,10 @@ export default function useLogin() {
 
   async function loginSubmitHandler(e) {
     e.preventDefault();
-    const { data, error } = await supabase.auth.signInWithPassword(loginState);
+    const { error } = await supabase.auth.signInWithPassword(loginState);
     if (error) return setLoginErrorMessage('아이디와 비밀번호가 일치하지 않습니다!');
-
-    //로그인 처리
     const { SUCCESS } = ALERT_TYPE;
     openAlert({ type: SUCCESS, text: '로그인을 완료했습니다.' });
-    login(data.session.access_token, data.user.id, data.user.user_metadata.nickname);
-
     return navigate(redirectPath);
   }
 
