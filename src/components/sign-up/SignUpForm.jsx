@@ -1,6 +1,10 @@
 import useSignUp from '@hooks/useSignUp';
 import InputForm from '@components/common/InputForm';
 
+function FormField({ children }) {
+  return <div className='mb-[10px] min-h-[85px]'>{children}</div>;
+}
+
 export default function SignUpForm() {
   const { signUpFormData, errorMessage, isDuplicateChecked, signUpSubmitHandler, signUpChangeHandler, checkDuplicate } =
     useSignUp();
@@ -11,7 +15,7 @@ export default function SignUpForm() {
       className='flex flex-col justify-between h-[500px] w-[400px] py-[30px] px-[30px] border-[1px] shadow-md rounded-md'
     >
       <div>
-        <div className='mb-[10px] min-h-[85px]'>
+        <FormField>
           <div className='flex gap-[10px] justify-between items-end'>
             <InputForm
               className='px-[5px] py-[5px] w-[200px] rounded-xl border border-input focus:border-accent focus:outline-none'
@@ -35,8 +39,8 @@ export default function SignUpForm() {
           <p className={`text-sm ${isDuplicateChecked.email ? 'text-green-500' : 'text-red-500'}`}>
             {errorMessage.email}
           </p>
-        </div>
-        <div className='mb-[10px] min-h-[85px]'>
+        </FormField>
+        <FormField>
           <InputForm
             className='px-[5px] py-[5px] rounded-xl border border-input focus:border-accent focus:outline-none'
             labelName='비밀번호'
@@ -47,8 +51,8 @@ export default function SignUpForm() {
             onChange={signUpChangeHandler}
           />
           <p className='text-sm text-red-500'>{errorMessage.password}</p>
-        </div>
-        <div className='mb-[10px] min-h-[85px]'>
+        </FormField>
+        <FormField>
           <InputForm
             className='px-[5px] py-[5px] rounded-xl border border-input focus:border-accent focus:outline-none'
             labelName='비밀번호 재입력'
@@ -59,8 +63,8 @@ export default function SignUpForm() {
             onChange={signUpChangeHandler}
           />
           <p className='text-sm text-red-500'>{errorMessage.confirmPassword}</p>
-        </div>
-        <div className='mb-[10px] min-h-[85px]'>
+        </FormField>
+        <FormField>
           <InputForm
             className='px-[5px] py-[5px] rounded-xl border border-input focus:border-accent focus:outline-none'
             labelName='닉네임'
@@ -71,7 +75,7 @@ export default function SignUpForm() {
             onChange={signUpChangeHandler}
           />
           <p className='text-sm text-red-500'>{errorMessage.nickname}</p>
-        </div>
+        </FormField>
       </div>
       <button
         type='submit'
