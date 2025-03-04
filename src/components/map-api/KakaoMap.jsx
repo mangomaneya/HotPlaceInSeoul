@@ -23,7 +23,7 @@ function KakaoMap() {
         }
         setMarkerData(data);
       } catch (error) {
-        openAlert({ type: ERROR, text: '데이터 로드에 실패했습니다', error });
+        openAlert({ type: ERROR, text: '데이터 로드에 실패했습니다' });
       }
     };
     handlemarkerData();
@@ -42,7 +42,7 @@ function KakaoMap() {
       const map = new kakao.maps.Map(mapContainer.current, options);
       //지도생성
       if (markerData.length === 0) {
-        openAlert({ type:ERROR, text: '마커 데이터를 불러오는데 실패했습니다, 새로고침해주세요' });
+        openAlert({ type: ERROR, text: '마커 데이터를 불러오는데 실패했습니다, 새로고침해주세요' });
         return;
       }
       markerData.forEach((item) => {
