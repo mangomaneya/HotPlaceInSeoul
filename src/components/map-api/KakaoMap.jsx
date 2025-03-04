@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 // import { positions } from './boundary'; 마커 표시 임시 데이터터
 import supabase from '../../lib/api/supabaseAPI';
 import MapController from './MapController';
+import MarkerInfo from './markerInfo';
 function KakaoMap() {
   const mapContainer = useRef(null); //지도 컨테이너
   // const map = useRef(null); // 지도 객체
