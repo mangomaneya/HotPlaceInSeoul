@@ -4,6 +4,7 @@
 
 body {
   color: theme('colors.text-primary');
+  font-family: theme('fontFamily.pre');
 }
 
 .flexCenter {
