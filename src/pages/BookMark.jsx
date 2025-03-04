@@ -7,7 +7,7 @@ const BookMark = () => {
   const { data: bookmarkList = [], isPending, isError } = useGetBookmarks();
   const booksNum = bookmarkList.length;
   const [selectPost, setSelectPost] = useState(null);
-  const userNickName = localStorage.getItem('nickname');
+  const userNickName = bookmarkList[0].users.nickname;
 
   if (isPending) {
     return <div>로딩 중...</div>;
