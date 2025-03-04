@@ -5,6 +5,8 @@ import MapController from './MapController';
 import MarkerInfo from './markerInfo';
 import { openAlert } from '@/lib/utils/openAlert';
 import { ALERT_TYPE } from '@/constants/alert-constant';
+import YoutubeModal from '../modal/youtube-modal';
+import DetailModal from '../modal/detail-modal';
 const { ERROR } = ALERT_TYPE;
 function KakaoMap() {
   const mapContainer = useRef(null); //지도 컨테이너
@@ -13,7 +15,11 @@ function KakaoMap() {
   const [mapCenter, setMapCenter] = useState({ lat: 37.5487477114048, lon: 127.04589900432654 });
   const [clickedMarker, setClickedMarker] = useState({}); // toggle여부를 위한 상태
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const [dataLoading, setDataLoading] = useState(true);
+  const [isYoutubeModalOpen, setIsYoutubeModalOpen] = useState(false);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   //supabase의 데이터 호출부
+
   useEffect(() => {
     const handlemarkerData = async () => {
       try {
@@ -24,6 +30,8 @@ function KakaoMap() {
         setMarkerData(data);
       } catch (error) {
         openAlert({ type: ERROR, text: '데이터 로드에 실패했습니다' });
+      } finally {
+        setDataLoading(false);
       }
     };
     handlemarkerData();
@@ -41,12 +49,14 @@ function KakaoMap() {
       };
       const map = new kakao.maps.Map(mapContainer.current, options);
       //지도생성
-      if (markerData.length === 0) {
+      if (!dataLoading && markerData.length === 0) {
         openAlert({ type: ERROR, text: '마커 데이터를 불러오는데 실패했습니다, 새로고침해주세요' });
         return;
       }
       markerData.forEach((item) => {
         const name = item.name;
+        const uniqueId = item.id;
+        const area = item.area;
         const lat = parseFloat(item.latitude);
         const lon = parseFloat(item.longitude);
         const markerPosition = new kakao.maps.LatLng(lat, lon);
@@ -67,12 +77,27 @@ function KakaoMap() {
           image: hotplaceMarker,
         });
 
+        const overlayContent = document.createElement('div');
+        overlayContent.innerHTML = `
+                    <div class="bg-orange-500 w-[200px] p-4 rounded-md shadow-lg text-white">
+            <h3 class="font-bold">${item.name}</h3>
+            <p>${item.area}</p>
+            <button id="detail-btn-${item.id}" class="bg-lime-300 px-2 py-1 mt-2 text-white rounded-md w-full">
+              자세히 보기
+            </button>
+          </div>
+        `;
+
         const customInfoOverlay = new kakao.maps.CustomOverlay({
-          content: name,
+          content: overlayContent,
           removable: true,
           position: markerPosition,
           yAnchor: 2,
           zIndex: 3,
+        });
+        overlayContent.querySelector(`#detail-btn-${item.id}`).addEventListener('click', () => {
+          setSelectedMarker({ id: item.id, name: item.name, area: item.area });
+          setIsYoutubeModalOpen(true);
         });
 
         kakao.maps.event.addListener(marker, 'click', function () {
@@ -117,6 +142,9 @@ function KakaoMap() {
       <div className=' bg-point flex items-center  w-3/4 h-[480px] rounded-sm  border-solid border-[3px] border-black mx-auto'>
         <div id='map' ref={mapContainer} className='w-full h-full'></div>
       </div>
+      {isYoutubeModalOpen && selectedMarker && (
+        <DetailModal id={selectedMarker.id} onClose={() => setIsDetailModalOpen(false)} />
+      )}
     </>
   );
 }
