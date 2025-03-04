@@ -1,4 +1,4 @@
-import supabase from '../api/supabaseAPI';
+import supabase from '@api/supabaseAPI';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetBookmarks = () => {
