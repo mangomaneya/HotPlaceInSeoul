@@ -1,14 +1,15 @@
 import DetailModal from '@/components/modal/detail-modal';
 import { STORE_CONSTANT } from '@/constants/store-constant';
 import { useGetBookmarks } from '@/lib/queries/GetBookmarks';
+import useAuthStore from '@/store/zustand/authStore';
 import { useState } from 'react';
 
 const BookMark = () => {
   const { data: bookmarkList = [], isPending, isError } = useGetBookmarks();
   const booksNum = bookmarkList.length;
   const [selectPost, setSelectPost] = useState(null);
-  const token = JSON.parse(localStorage.getItem('sb-frzxflvdpgomgaanvqyf-auth-token')) || null;
-  const userNickName = token?.user?.user_metadata?.nickname || 'Guest'; // 토큰으로 비교하여 로그인하지 않은 사용자는 게스트처리
+  const { userData } = useAuthStore((state) => state);
+  const userNickName = userData.userNickname;
 
   if (isPending) {
     return <div>로딩 중...</div>;
@@ -17,7 +18,6 @@ const BookMark = () => {
   if (isError) {
     <div>에러가 발생했습니다.</div>;
   }
-  console.log('bookmarkList', bookmarkList);
 
   function closeModal() {
     setSelectPost(null);

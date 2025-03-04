@@ -1,9 +1,10 @@
+import useAuthStore from '@/store/zustand/authStore';
 import supabase from '@api/supabaseAPI';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetBookmarks = () => {
-  const token = JSON.parse(localStorage.getItem('sb-frzxflvdpgomgaanvqyf-auth-token')) || null;
-  const userId = token?.user?.id; // 현재 로그인 한 사용자의 ID
+  const { userData } = useAuthStore((state) => state);
+  const userId = userData.userId; // 현재 로그인 한 사용자의 ID
 
   const getBookmarks = async () => {
     if (!userId) return [];
