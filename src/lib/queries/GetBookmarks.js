@@ -11,7 +11,7 @@ export const useGetBookmarks = () => {
 
     const { data, error } = await supabase
       .from('bookmarks')
-      .select('*, users(nickname), hotplaces(name, img_url)')
+      .select('*, hotplaces(name, img_url)')
       .eq('user_id', userId); // 현재 로그인 한 사용자의 북마크 리스트
     if (error) {
       throw new Error(error.message);
