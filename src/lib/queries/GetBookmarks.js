@@ -8,7 +8,6 @@ export const useGetBookmarks = () => {
 
   const getBookmarks = async () => {
     if (!userId) return [];
-
     const { data, error } = await supabase
       .from('bookmarks')
       .select('*, hotplaces(name, img_url)')
@@ -18,7 +17,6 @@ export const useGetBookmarks = () => {
     }
     return data;
   };
-
   return useQuery({
     queryKey: ['bookmarks'],
     queryFn: getBookmarks,

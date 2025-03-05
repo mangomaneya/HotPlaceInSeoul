@@ -53,9 +53,13 @@ export default function Nav() {
         {navMenu.map((menu) => (
           <li key={menu.name}>
             {menu.type === 'link' ? (
-              <Link to={menu.path}>{menu.name}</Link>
+              <Link className='hover:font-bold text-[20px]' to={menu.path}>
+                {menu.name}
+              </Link>
             ) : (
-              <button onClick={menu.btnEvent}>{menu.name}</button>
+              <button className='hover:font-bold text-[20px] ' onClick={menu.btnEvent}>
+                {menu.name}
+              </button>
             )}
           </li>
         ))}
