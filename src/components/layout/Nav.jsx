@@ -1,8 +1,8 @@
-import { PATH } from '@/constants/path-constant';
-import useLogout from '@hooks/useLogout';
-import useAuthStore from '@/store/zustand/authStore';
+import { PATH } from '@constants/path-constant';
+import useLogout from '@lib/hooks/useLogout';
+import useAuthStore from '@store/zustand/authStore';
 import { Link } from 'react-router-dom';
-const { LOGIN, SIGN_UP, HOME } = PATH;
+const { LOGIN, SIGN_UP, BOOK_MARK } = PATH;
 
 const publicMenu = () => [
   {
@@ -22,7 +22,7 @@ const privateMenu = (btnEventFunc) => [
   {
     name: '북마크',
     type: 'link',
-    path: HOME,
+    path: BOOK_MARK,
   },
   {
     name: '로그아웃',
@@ -53,9 +53,13 @@ export default function Nav() {
         {navMenu.map((menu) => (
           <li key={menu.name}>
             {menu.type === 'link' ? (
-              <Link to={menu.path}>{menu.name}</Link>
+              <Link className='hover:font-bold text-[20px]' to={menu.path}>
+                {menu.name}
+              </Link>
             ) : (
-              <button onClick={menu.btnEvent}>{menu.name}</button>
+              <button className='hover:font-bold text-[20px] ' onClick={menu.btnEvent}>
+                {menu.name}
+              </button>
             )}
           </li>
         ))}

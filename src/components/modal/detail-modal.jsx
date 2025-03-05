@@ -1,22 +1,18 @@
+import { ALERT_TYPE } from '@constants/alert-constant';
+import { STORE_CONSTANT } from '@constants/store-constant';
+import { useBookmarkMutation } from '@lib/mutation/useBookmarkMutation';
+import { useGetHotplaces } from '@lib/queries/GetHotplaces';
+import { useBookmarkQuey } from '@lib/queries/useBookmarkQuery';
+import { openAlert } from '@lib/utils/openAlert';
 import React from 'react';
-import { IoCloseOutline } from 'react-icons/io5';
-import { FaYoutube } from 'react-icons/fa6';
-import { FaRegBookmark } from 'react-icons/fa6';
 import { FaBookmark } from 'react-icons/fa';
-import { useState } from 'react';
-import { STORE_CONSTANT } from '@/constants/store-constant';
-import { openAlert } from '@/lib/utils/openAlert';
-import { ALERT_TYPE } from '@/constants/alert-constant';
-const STORE_MOCK_DATA = {
-  name: '양복점',
-  category_name: '음식점',
-  address_road_name: '서울 용산구 새창로 209 5동 지하층 3호',
-  contact_number: '02-1234-5678',
-  open_hours: '10:00 ~  22:00',
-  img_url:
-    'https://ugc-images.catchtable.co.kr/catchtable/shopinfo/s2ITBk3Dv9LVsluH7e0DjIw/3619ed3090ef45d0a7e3f3c93e8489db',
-}; //TODO: supabase 데이터 완성되면 지울 예정
-const { INFO } = ALERT_TYPE;
+import { FaRegBookmark, FaYoutube } from 'react-icons/fa6';
+import { IoCloseOutline } from 'react-icons/io5';
+import Error from '@components/common/Error';
+import Loading from '@components/common/Loading';
+import { useMemo } from 'react';
+import useAuthStore from '@store/zustand/authStore';
+const { WARNING } = ALERT_TYPE;
 const { STORE_NAME, STORE_ADDRESS, STORE_CONTACT, STORE_PIC, BUSINESS_HOUR, CATEGORY } = STORE_CONSTANT;
 
 const DETAIL_LIST = [
@@ -41,46 +37,73 @@ const DETAIL_LIST = [
   },
 ];
 
-//TODO: props로 리스트에서 타겟팅한 가게의 id 받아오기 , 혹시 모달 밖에 클릭했을 때 닫히는 이벤트 구현한다면 onClose 상태도 같이 받아오기 & 이벤트 버블링 막아서 처리하기
-export default function DetailModal() {
-  //TODO: user정보 받아와서 bookmark 여부 확인 후 초기값으로 넣어주기
-  const [isBookMarked, setIsBookMarked] = useState(false);
+export default function DetailModal({ id: storeId, setOpenModal }) {
+  const {
+    userData: { token },
+  } = useAuthStore();
+  const { bookmarkData, isError: bookmarkError, isPending: isBookmarkPending, error } = useBookmarkQuey({ storeId });
+  const { addMutate, deleteMutate, isMutatePending, error: mutateError } = useBookmarkMutation({ storeId });
 
-  const addToBookmark = () => {
-    setIsBookMarked(!isBookMarked);
-    openAlert({ type: INFO, text: `북마크${isBookMarked ? '에서 삭제' : '에 추가'}되었습니다.` });
-    //TODO: user의 bookmark 상태 바꾸기 (->post api연결)
+  const { data: detailData } = useGetHotplaces();
+
+  const isBookMarked = bookmarkData?.length > 0;
+  const storeData = useMemo(() => detailData.filter(({ id }) => id === storeId)[0], [detailData, storeId]);
+  const isError = bookmarkError || mutateError || storeData?.length === 0;
+  const isPending = isBookmarkPending || isMutatePending;
+
+  const handleBookmark = () => {
+    if (isBookMarked) {
+      openAlert({ type: WARNING, text: '북마크에서 삭제하시겠습니까?' }).then((res) => {
+        if (res.isConfirmed) return deleteMutate();
+      });
+    } else {
+      openAlert({ type: WARNING, text: '북마크에 추가하시겠습니까?' }).then((res) => {
+        if (res.isConfirmed) return addMutate();
+      });
+    }
   };
 
-  return (
-    <section className='modal fixedCenter flex flex-col justify-evenly'>
-      <p className='h-[80%] md:h-[65%] max-h-[400px] mb-5'>
-        <img
-          src={STORE_MOCK_DATA[STORE_PIC]}
-          alt={STORE_MOCK_DATA[STORE_NAME]}
-          className='object-cover w-full h-full rounded-lg'
-        />
-        <span className='text-text-primary absolute top-2 right-2 text-2xl cursor-pointer '>
-          <IoCloseOutline />
-        </span>
-      </p>
+  const openYoutubeModal = () => {
+    setOpenModal({ youtube: true, detail: false });
+  };
 
+  const closeDetailModal = () => {
+    setOpenModal({ detail: false, youtube: false });
+  };
+
+  if (isPending) return <Loading />;
+  if (isError) return <Error isOpenErrorAlert={true} errorMessage={isError ? error.message : mutateError} />;
+
+  return (
+    <section className='flex flex-col modal fixedCenter justify-evenly'>
+      <p className='max-h-[400px] md:max-h-[65%] mb-5'>
+        <img
+          src={storeData[STORE_PIC]}
+          alt={storeData[STORE_NAME]}
+          className='object-cover w-full max-h-[400px] rounded-lg'
+        />
+      </p>
+      <span className='text-text-primary absolute top-2 right-2 text-2xl cursor-pointer' onClick={closeDetailModal}>
+        <IoCloseOutline />
+      </span>
       <div className='flexCenter !justify-between  mb-[10px]'>
-        <h4 className='font-bold text-2xl sm:text-3xl text-accent-active'>{STORE_MOCK_DATA[STORE_NAME]}</h4>
-        <span className='text-2xl cursor-pointer' onClick={addToBookmark}>
-          {isBookMarked ? <FaBookmark className='text-accent' /> : <FaRegBookmark className='text-accent' />}
-        </span>
+        <h4 className='text-2xl font-bold sm:text-3xl text-accent-active'>{storeData[STORE_NAME]}</h4>
+        {!!token && (
+          <span className='text-2xl cursor-pointer' onClick={handleBookmark}>
+            {isBookMarked ? <FaBookmark className='text-accent' /> : <FaRegBookmark className='text-accent' />}
+          </span>
+        )}
       </div>
 
       <dl className='flex flex-wrap mb-[20px] '>
         {DETAIL_LIST.map((list) => (
           <React.Fragment key={list.key}>
             <dt className='w-[30%] sm:w-[80px] mb-1'>{list.title}</dt>
-            <dd className='w-[70%] sm:w-[calc(100%-80px)]'>{STORE_MOCK_DATA[list.key] ?? list?.defaultMessage}</dd>
+            <dd className='w-[70%] sm:w-[calc(100%-80px)]'>{storeData[list.key] ?? list?.defaultMessage}</dd>
           </React.Fragment>
         ))}
       </dl>
-      <button className='modalBtn'>
+      <button className='modalBtn' onClick={openYoutubeModal}>
         <FaYoutube className='text-4xl w-full text-white' />
       </button>
     </section>

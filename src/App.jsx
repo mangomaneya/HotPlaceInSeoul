@@ -1,8 +1,7 @@
-import Router from '@router/Router';
-// import Routes from '@router/Routes';
+import Routes from '@router/Routes';
 
 function App() {
-  return <Router />;
+  return <Routes />;
 }
 
 export default App;

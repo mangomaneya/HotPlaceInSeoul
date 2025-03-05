@@ -8,9 +8,7 @@
       "@router/*": ["src/router/*"],
       "@constants/*": ["src/constants/*"],
       "@store/*": ["src/store/*"],
-      "@utils/*": ["src/lib/utils/*"],
-      "@api/*": ["src/lib/api/*"],
-      "@hooks/*": ["src/lib/hooks/*"]
+      "@lib/*": ["src/lib/*"]
     }
   }
 }

@@ -1,10 +1,12 @@
 import { useState } from 'react';
-
-export default function MapController({ handlePlaceSelect }) {
+import useAreaStore from '@store/zustand/useAreaStore';
+export default function MapController() {
   const [coordinate, setCoordinate] = useState('');
+  const { setSelectedArea, setMapCenter } = useAreaStore();
+
   const locationCoords = {
     '성수동': { lat: 37.5432, lon: 127.0563 },
-    '인사/낙원': { lat: 37.5744, lon: 126.9871 },
+    '인사동': { lat: 37.5744, lon: 126.9871 },
     '망원동': { lat: 37.5568, lon: 126.9014 },
   };
 
@@ -13,13 +15,14 @@ export default function MapController({ handlePlaceSelect }) {
     setCoordinate(area);
 
     if (locationCoords[area]) {
-      handlePlaceSelect(locationCoords[area].lat, locationCoords[area].lon);
+      setMapCenter(locationCoords[area].lat, locationCoords[area].lon);
+      setSelectedArea(area);
     }
   };
   return (
     <div className='flex items-center gap-4'>
       <select
-        className=' w-[200px] h-[50px] border-solid border-[6px] rounded-xl border-neutral-300'
+        className=' w-[200px] h-[50px] border-solid border-[6px] rounded-xl border-neutral-300 hover:border-accent cursor-pointer transition-colors duration-200'
         value={coordinate}
         onChange={handleSelect}
       >
@@ -29,7 +32,6 @@ export default function MapController({ handlePlaceSelect }) {
           </option>
         ))}
       </select>
-      <button className='text-xl w-[200px] h-[40px] rounded-md bg-button text-accent '>목록</button>
     </div>
   );
 }
