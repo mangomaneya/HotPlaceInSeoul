@@ -180,8 +180,8 @@
     </tr>
     <tr>
       <td align="center">
-        마이 페이지 구현 <br/>
-        레이아웃 설계 <br/>
+        핫플 리스트 설계 <br/>
+        북마크 페이지 구현 <br/>
       </td>
       <td align="center">
         지도 API 연결 <br/>
