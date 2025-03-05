@@ -1,8 +1,8 @@
-import useAuthStore from '@/store/zustand/authStore';
+import useAuthStore from '@store/zustand/authStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { postToBookmark, removeFromBookmark } from '../api/bookmarkAPI';
+import { postToBookmark, removeFromBookmark } from '@lib/api/bookmarkAPI';
 import { useState } from 'react';
-import { QUERY_KEYS } from '@/constants/query-keys';
+import { QUERY_KEYS } from '@constants/query-keys';
 
 const ERROR_MESSAGE = {
   POST: '북마크를 추가하지 못했습니다.',

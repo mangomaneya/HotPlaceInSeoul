@@ -1,5 +1,5 @@
-import HotplaceList from '@/components/HotplaceList/HotplaceList';
-import KakaoMap from '@/components/map-api/KakaoMap';
+import HotplaceList from '@components/HotplaceList/HotplaceList';
+import KakaoMap from '@components/map-api/KakaoMap';
 
 export default function Home() {
   return (

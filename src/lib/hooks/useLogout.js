@@ -1,9 +1,9 @@
-import supabase from '@api/supabaseAPI';
+import supabase from '@lib/api/supabaseAPI';
 import { useNavigate } from 'react-router-dom';
-import { openAlert } from '@utils/openAlert';
-import { ALERT_TYPE } from '@/constants/alert-constant';
-import { PATH } from '@/constants/path-constant';
-import useAuthStore from '@/store/zustand/authStore';
+import { openAlert } from '@lib/utils/openAlert';
+import { ALERT_TYPE } from '@constants/alert-constant';
+import { PATH } from '@constants/path-constant';
+import useAuthStore from '@store/zustand/authStore';
 const { SUCCESS, WARNING, ERROR } = ALERT_TYPE;
 const { HOME } = PATH;
 

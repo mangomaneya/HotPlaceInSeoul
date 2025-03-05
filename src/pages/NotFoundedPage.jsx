@@ -1,4 +1,4 @@
-import { PATH } from '@/constants/path-constant';
+import { PATH } from '@constants/path-constant';
 import { useNavigate } from 'react-router-dom';
 
 function NotFoundedPage() {

@@ -1,7 +1,7 @@
-import useAuthStore from '@/store/zustand/authStore';
+import useAuthStore from '@store/zustand/authStore';
 import { useQuery } from '@tanstack/react-query';
-import { reqUserBookmark } from '../api/bookmarkAPI';
-import { QUERY_KEYS } from '@/constants/query-keys';
+import { reqUserBookmark } from '@lib/api/bookmarkAPI';
+import { QUERY_KEYS } from '@constants/query-keys';
 const { BOOKMARKS } = QUERY_KEYS;
 export const useBookmarkQuey = ({ storeId }) => {
   const {

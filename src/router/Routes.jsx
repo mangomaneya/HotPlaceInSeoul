@@ -1,14 +1,14 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Layout from '@/components/layout/Layout';
-import { PATH } from '@/constants/path-constant';
-import Home from '@/pages/Home';
+import Layout from '@components/layout/Layout';
+import { PATH } from '@constants/path-constant';
+import Home from '@pages/Home';
 import ProtectedRouter from '@router/ProtectedRouter';
-import SignUp from '@/pages/SignUp';
-import Login from '@/pages/Login';
-import BookMark from '@/pages/BookMark';
-import NotFoundedPage from '@/pages/NotFoundedPage';
+import SignUp from '@pages/SignUp';
+import Login from '@pages/Login';
+import BookMark from '@pages/BookMark';
+import NotFoundedPage from '@pages/NotFoundedPage';
 import { useEffect } from 'react';
-import supabase from '@api/supabaseAPI';
+import supabase from '@lib/api/supabaseAPI';
 const { LOGIN, SIGN_UP, HOME, BOOK_MARK } = PATH;
 
 function Routes() {

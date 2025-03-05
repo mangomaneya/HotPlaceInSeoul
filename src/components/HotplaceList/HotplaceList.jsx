@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { useGetHotplaces } from '@/lib/queries/GetHotplaces';
-import DetailModal from '@/components/modal/detail-modal';
-import YoutubeModal from '@/components/modal/youtube-modal';
-import { STORE_CONSTANT } from '@/constants/store-constant';
-import Loading from '@/components/common/Loading';
-import Error from '@/components/common/Error';
-import useAreaStore from '@/store/zustand/useAreaStore';
+import { useGetHotplaces } from '@lib/queries/GetHotplaces';
+import DetailModal from '@components/modal/detail-modal';
+import YoutubeModal from '@components/modal/youtube-modal';
+import { STORE_CONSTANT } from '@constants/store-constant';
+import Loading from '@components/common/Loading';
+import Error from '@components/common/Error';
+import useAreaStore from '@store/zustand/useAreaStore';
 
 const HotplaceList = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -33,9 +33,6 @@ const HotplaceList = () => {
     return <Error />;
   }
 
-  function closeModal() {
-    setSelectedPost(null);
-  }
   document.body.style.overflow = isVisible ? 'hidden' : 'auto';
   return (
     <article className='m-3 w-[250px] overflow-y-auto h-[80vh]'>

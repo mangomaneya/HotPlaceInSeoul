@@ -1,4 +1,4 @@
-import { ALERT_TYPE } from '@/constants/alert-constant';
+import { ALERT_TYPE } from '@constants/alert-constant';
 import Swal from 'sweetalert2';
 
 const { ERROR, SUCCESS, INFO, WARNING } = ALERT_TYPE;

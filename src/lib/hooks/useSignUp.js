@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signUpValidate } from '@utils/signUpValidate';
-import supabase from '@api/supabaseAPI';
+import { signUpValidate } from '@lib/utils/signUpValidate';
+import supabase from '@lib/api/supabaseAPI';
 import useAuthStore from '@store/zustand/authStore';
-import { openAlert } from '@utils/openAlert';
+import { openAlert } from '@lib/utils/openAlert';
 import { ALERT_TYPE } from '@constants/alert-constant';
 
 const errorMessageText = {
