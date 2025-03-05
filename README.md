@@ -3,7 +3,7 @@
 ###
 
 <div align="center">
-  <img height="200" src="https://github.com/user-attachments/assets/cf94788b-d6c8-4263-96fc-c28c9051616a"  />
+  <img height="400" src="https://github.com/user-attachments/assets/cf94788b-d6c8-4263-96fc-c28c9051616a"  />
 </div>
 
 ###
@@ -21,7 +21,7 @@
 ###
 
 <div align="center">
-  <img height="300" src="https://github.com/user-attachments/assets/b26b89d3-9752-4a21-bfda-eedd5da60d40"  />
+  <img height="400" src="https://github.com/user-attachments/assets/b26b89d3-9752-4a21-bfda-eedd5da60d40"  />
 </div>
 
 ###
@@ -31,7 +31,7 @@
 ###
 
 <div align="center">
-  <img height="300" src="https://github.com/user-attachments/assets/91765771-3e79-4a55-932d-fb5ed224e053"  />
+  <img height="400" src="https://github.com/user-attachments/assets/91765771-3e79-4a55-932d-fb5ed224e053"  />
 </div>
 
 ###
@@ -45,7 +45,7 @@
 ###
 
 <div align="center">
-  <img height="300" src="https://github.com/user-attachments/assets/82b559cf-94fa-492b-a7ad-33ecc5eaba87"  />
+  <img height="400" src="https://github.com/user-attachments/assets/82b559cf-94fa-492b-a7ad-33ecc5eaba87"  />
 </div>
 
 ###
@@ -59,7 +59,7 @@
 ###
 
 <div align="center">
-  <img height="300" src="https://github.com/user-attachments/assets/b7f63683-8b36-42a3-9af6-eb107ef823a4"  />
+  <img height="400" src="https://github.com/user-attachments/assets/b7f63683-8b36-42a3-9af6-eb107ef823a4"  />
 </div>
 
 ###
@@ -83,7 +83,7 @@
 ###
 
 <div align="center">
-  <img height="300" src="https://github.com/user-attachments/assets/6df0ab25-aa67-43f9-8f01-6cc54cdea23e"  />
+  <img height="400" src="https://github.com/user-attachments/assets/6df0ab25-aa67-43f9-8f01-6cc54cdea23e"  />
 </div>
 
 ###
@@ -93,7 +93,7 @@
 ###
 
 <div align="center">
-  <img height="300" src="https://github.com/user-attachments/assets/e4ca6d9e-f0d9-44bb-aaa7-2972194dd01e"  />
+  <img height="400" src="https://github.com/user-attachments/assets/e4ca6d9e-f0d9-44bb-aaa7-2972194dd01e"  />
 </div>
 
 ###
@@ -189,7 +189,7 @@
       </td>
       <td align="center">
         DB 설계 <br/>
-        ProtectedRouter 및 사용자 상태 관리 구현 <br/>
+        ProtectedRouter 및 상태 관리 구현 <br/>
       </td>
     </tr>
     <tr>
