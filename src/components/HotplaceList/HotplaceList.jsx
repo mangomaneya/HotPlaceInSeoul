@@ -1,15 +1,15 @@
-import { STORE_CONSTANT } from '@/constants/store-constant';
+import { useState } from 'react';
 import { useGetHotplaces } from '@/lib/queries/GetHotplaces';
 import { useState } from 'react';
 import DetailModal from '@/components/modal/detail-modal';
 import YoutubeModal from '@/components/modal/youtube-modal';
+import { STORE_CONSTANT } from '@/constants/store-constant';
 
 const HotplaceList = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
   const { data: hotplaces = [], isPending, isError } = useGetHotplaces();
   const [openModal, setOpenModal] = useState({ detail: false, youtube: false });
-
   const handleOpenModal = (id) => {
     setSelectedPost(id);
     setOpenModal({
@@ -30,8 +30,10 @@ const HotplaceList = () => {
     return <div>에러가 발생했습니다.</div>;
   }
 
+  function closeModal() {
+    setSelectedPost(null);
+  }
   document.body.style.overflow = isVisible ? 'hidden' : 'auto';
-
   return (
     <article className='m-3 w-[250px] overflow-y-auto h-[80vh]'>
       {isVisible && (
@@ -54,7 +56,10 @@ const HotplaceList = () => {
           ))}
         </div>
       )}
-      <button onClick={toggleHotPlaceList} className='fixed p-2 w-[250px] bg-button bottom-0 border-2 rounded-t-2xl'>
+      <button
+        onClick={toggleHotPlaceList}
+        className='fixed p-2 w-[250px] bg-accent text-white bottom-0 border-2 rounded-t-2xl'
+      >
         {isVisible ? '핫플 닫기' : '핫플 보기'}
       </button>
       {openModal.detail && <DetailModal id={selectedPost} setOpenModal={setOpenModal} />}
@@ -62,5 +67,4 @@ const HotplaceList = () => {
     </article>
   );
 };
-
 export default HotplaceList;

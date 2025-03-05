@@ -5,7 +5,6 @@ import { STORE_CONSTANT } from '@/constants/store-constant';
 import { useGetBookmarks } from '@/lib/queries/GetBookmarks';
 import useAuthStore from '@/store/zustand/authStore';
 import { useState } from 'react';
-
 const BookMark = () => {
   const { data: bookmarkList = [], isPending, isError } = useGetBookmarks();
   const booksNum = bookmarkList.length;
@@ -16,21 +15,18 @@ const BookMark = () => {
   if (isPending) {
     return <Loading />;
   }
-
   if (isError) {
     return <Error />;
   }
-
   function closeModal() {
     setSelectPost(null);
   }
-
   return (
     <div>
       <section className='flexCenter pt-[70px]'>
         <div className='flex flex-col md:flex-row gap-[120px] justify-evenly items-center rounded-lg'>
           <div className='flex flex-wrap text-[26px]'>
-            <h1 className='text-accent font-bold'>{userNickName}</h1>님 안녕하세요!
+            <h1 className='font-bold text-accent'>{userNickName}</h1>님 안녕하세요!
           </div>
           <div className='flexCenter flex-col gap-6 bg-neutral-200 w-[170px] h-[170px] rounded-full'>
             <h2 className='text-[20px] font-bold'>북마크 수</h2>
@@ -61,5 +57,4 @@ const BookMark = () => {
     </div>
   );
 };
-
 export default BookMark;

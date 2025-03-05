@@ -9,6 +9,7 @@ export const useBookmarkQuey = ({ storeId }) => {
   } = useAuthStore();
 
   const getUserBookmark = async () => {
+    if (!userId) return [];
     const data = reqUserBookmark({ userId, storeId });
     return data;
   };
@@ -21,6 +22,7 @@ export const useBookmarkQuey = ({ storeId }) => {
   } = useQuery({
     queryKey: [BOOKMARKS, userId, storeId],
     queryFn: getUserBookmark,
+    enabled: true,
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 10,
   });
