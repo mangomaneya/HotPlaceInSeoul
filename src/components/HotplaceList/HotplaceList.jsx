@@ -21,7 +21,6 @@ const HotplaceList = () => {
   const selectedArea = useAreaStore((state) => state.selectedArea);
   const { data: hotplaces = [], isPending, isError } = useGetHotplaces({ area: selectedArea });
 
-
   function toggleHotPlaceList() {
     setIsVisible((prev) => !prev);
   }

@@ -8,7 +8,7 @@ import React from 'react';
 import { FaBookmark } from 'react-icons/fa';
 import { FaRegBookmark, FaYoutube } from 'react-icons/fa6';
 import { IoCloseOutline } from 'react-icons/io5';
-import Error from '../common/Error';
+import Error from '@components/common/Error';
 import Loading from '../common/Loading';
 import { useMemo } from 'react';
 import useAuthStore from '@/store/zustand/authStore';
