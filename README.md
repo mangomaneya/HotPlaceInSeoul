@@ -228,10 +228,13 @@
 
 ###
 
-<h2 align="left">🚨 트러블 슈팅</h2>
 
-###
+<h2 align="left">📃 프로젝트 기록</h2>
 
-<p align="left">추후 추가 예정</p>
+### 
+
+#### 배포 링크 : [핫플인서울](https://hot-place-in-seoul.vercel.app/)
+#### [<img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white" alt="Notion" /> 노션 Link](https://www.notion.so/teamsparta/5-_-19f2dc3ef514806c8dd0c575e0f0ce02)
+#### KPT 회고 : [추후 추가 예정..]()
 
 ###
