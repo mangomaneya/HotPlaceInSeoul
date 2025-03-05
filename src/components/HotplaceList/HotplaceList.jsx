@@ -3,11 +3,13 @@ import { useGetHotplaces } from '@/lib/queries/GetHotplaces';
 import DetailModal from '@/components/modal/detail-modal';
 import YoutubeModal from '@/components/modal/youtube-modal';
 import { STORE_CONSTANT } from '@/constants/store-constant';
+import Loading from '@/components/common/Loading';
+import Error from '@/components/common/Error';
+import useAreaStore from '@/store/zustand/useAreaStore';
 
 const HotplaceList = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
-  const { data: hotplaces = [], isPending, isError } = useGetHotplaces();
   const [openModal, setOpenModal] = useState({ detail: false, youtube: false });
   const handleOpenModal = (id) => {
     setSelectedPost(id);
@@ -16,17 +18,20 @@ const HotplaceList = () => {
       youtube: false,
     });
   };
+  const selectedArea = useAreaStore((state) => state.selectedArea);
+  const { data: hotplaces = [], isPending, isError } = useGetHotplaces({ area: selectedArea });
+
 
   function toggleHotPlaceList() {
     setIsVisible((prev) => !prev);
   }
 
   if (isPending) {
-    return <div>로딩 중...</div>;
+    return <Loading />;
   }
 
   if (isError) {
-    return <div>에러가 발생했습니다.</div>;
+    return <Error />;
   }
 
   function closeModal() {
