@@ -47,7 +47,7 @@ export default function DetailModal({ id: storeId, setOpenModal }) {
   const { data: detailData } = useGetHotplaces();
 
   const isBookMarked = bookmarkData?.length > 0;
-  const storeData = useMemo(() => detailData.filter(({ id }) => id === storeId)[0], [detailData, storeId]);
+  const storeData = detailData?.filter(({ id }) => id === storeId)[0];
   const isError = bookmarkError || mutateError || storeData?.length === 0;
   const isPending = isBookmarkPending || isMutatePending;
 
@@ -78,8 +78,8 @@ export default function DetailModal({ id: storeId, setOpenModal }) {
     <section className='flex flex-col modal fixedCenter justify-evenly'>
       <p className='max-h-[400px] md:max-h-[65%] mb-5'>
         <img
-          src={storeData[STORE_PIC]}
-          alt={storeData[STORE_NAME]}
+          src={storeData?.[STORE_PIC]}
+          alt={storeData?.[STORE_NAME]}
           className='object-cover w-full max-h-[400px] rounded-lg'
         />
       </p>
@@ -87,7 +87,7 @@ export default function DetailModal({ id: storeId, setOpenModal }) {
         <IoCloseOutline />
       </span>
       <div className='flexCenter !justify-between  mb-[10px]'>
-        <h4 className='text-2xl font-bold sm:text-3xl text-accent-active'>{storeData[STORE_NAME]}</h4>
+        <h4 className='text-2xl font-bold sm:text-3xl text-accent-active'>{storeData?.[STORE_NAME]}</h4>
         {!!token && (
           <span className='text-2xl cursor-pointer' onClick={handleBookmark}>
             {isBookMarked ? <FaBookmark className='text-accent' /> : <FaRegBookmark className='text-accent' />}
@@ -99,7 +99,7 @@ export default function DetailModal({ id: storeId, setOpenModal }) {
         {DETAIL_LIST.map((list) => (
           <React.Fragment key={list.key}>
             <dt className='w-[30%] sm:w-[80px] mb-1'>{list.title}</dt>
-            <dd className='w-[70%] sm:w-[calc(100%-80px)]'>{storeData[list.key] ?? list?.defaultMessage}</dd>
+            <dd className='w-[70%] sm:w-[calc(100%-80px)]'>{storeData?.[list.key] ?? list?.defaultMessage}</dd>
           </React.Fragment>
         ))}
       </dl>
