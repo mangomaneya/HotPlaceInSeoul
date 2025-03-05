@@ -52,7 +52,10 @@ const HotplaceList = () => {
           ))}
         </div>
       )}
-      <button onClick={toggleHotPlaceList} className='fixed p-2 w-[250px] bg-button bottom-0 border-2 rounded-t-2xl'>
+      <button
+        onClick={toggleHotPlaceList}
+        className='fixed p-2 w-[250px] bg-accent text-white bottom-0 border-2 rounded-t-2xl'
+      >
         {isVisible ? '핫플 닫기' : '핫플 보기'}
       </button>
       {selectedPost && <DetailModal id={selectedPost} closeModal={closeModal} />}
