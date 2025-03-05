@@ -5,26 +5,22 @@ import { STORE_CONSTANT } from '@/constants/store-constant';
 import { useGetBookmarks } from '@/lib/queries/GetBookmarks';
 import useAuthStore from '@/store/zustand/authStore';
 import { useState } from 'react';
-
 const BookMark = () => {
   const { data: bookmarkList = [], isPending, isError } = useGetBookmarks();
   const booksNum = bookmarkList.length;
   const [selectPost, setSelectPost] = useState(null);
-  const userData = useAuthStore((state) => state.userData);
+  const { userData } = useAuthStore((state) => state.userData);
   const userNickName = userData.userNickname;
 
   if (isPending) {
     return <Loading />;
   }
-
   if (isError) {
     return <Error />;
   }
-
   function closeModal() {
     setSelectPost(null);
   }
-
   return (
     <div>
       <section className='flexCenter pt-[70px]'>
@@ -61,5 +57,4 @@ const BookMark = () => {
     </div>
   );
 };
-
 export default BookMark;

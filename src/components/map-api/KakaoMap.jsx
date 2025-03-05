@@ -164,7 +164,7 @@ function KakaoMap() {
         <MapController handlePlaceSelect={handlePlaceSelect} />
       </div>
       <div className='flex w-full h-[480px]'>
-        <div id='map' ref={mapContainer} className='w-full h-full'></div>
+        <div id='map' ref={mapContainer} className='w-full h-full border-[5px] border-accent rounded-lg'></div>
         {openModal.detail && selectedMarker && <DetailModal id={selectedMarker.id} setOpenModal={setOpenModal} />}
         {openModal.youtube && selectedMarker && <YoutubeModal id={selectedMarker.id} setOpenModal={setOpenModal} />}
       </div>

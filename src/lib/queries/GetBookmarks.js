@@ -3,12 +3,11 @@ import supabase from '@api/supabaseAPI';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetBookmarks = () => {
-  const userData = useAuthStore((state) => state.userData);
+  const { userData } = useAuthStore((state) => state.userData);
   const userId = userData.userId; // 현재 로그인 한 사용자의 ID
 
   const getBookmarks = async () => {
     if (!userId) return [];
-
     const { data, error } = await supabase
       .from('bookmarks')
       .select('*, hotplaces(name, img_url)')
@@ -18,7 +17,6 @@ export const useGetBookmarks = () => {
     }
     return data;
   };
-
   return useQuery({
     queryKey: ['bookmarks'],
     queryFn: getBookmarks,

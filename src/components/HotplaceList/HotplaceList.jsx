@@ -1,27 +1,23 @@
 import { useState } from 'react';
 import { useGetHotplaces } from '@/lib/queries/GetHotplaces';
-import DetailModal from '@/components/modal/detail-modal';
+import DetailModal from '../modal/detail-modal';
 import { STORE_CONSTANT } from '@/constants/store-constant';
-import Loading from '@/components/common/Loading';
-import Error from '@/components/common/Error';
-import useAreaStore from '@/store/zustand/useAreaStore';
 
 const HotplaceList = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
-  const selectedArea = useAreaStore((state) => state.selectedArea);
-  const { data: hotplaces = [], isPending, isError } = useGetHotplaces({ area: selectedArea });
+  const { data: hotplaces = [], isPending, isError } = useGetHotplaces();
 
   function toggleHotPlaceList() {
     setIsVisible((prev) => !prev);
   }
 
   if (isPending) {
-    return <Loading />;
+    return <div>로딩 중...</div>;
   }
 
   if (isError) {
-    return <Error />;
+    return <div>에러가 발생했습니다.</div>;
   }
 
   function closeModal() {
@@ -50,7 +46,10 @@ const HotplaceList = () => {
           ))}
         </div>
       )}
-      <button onClick={toggleHotPlaceList} className='fixed p-2 w-[250px] bg-button bottom-0 border-2 rounded-t-2xl'>
+      <button
+        onClick={toggleHotPlaceList}
+        className='fixed p-2 w-[250px] bg-accent text-white bottom-0 border-2 rounded-t-2xl'
+      >
         {isVisible ? '핫플 닫기' : '핫플 보기'}
       </button>
       {selectedPost && <DetailModal id={selectedPost} closeModal={closeModal} />}
