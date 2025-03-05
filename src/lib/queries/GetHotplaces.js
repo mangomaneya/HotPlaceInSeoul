@@ -23,6 +23,6 @@ export const useGetHotplaces = ({ area = null } = {}) => {
     queryFn: getHotplaces,
     select: filterArea, // 가공한 값을 전달
     staleTime: 60 * 60 * 1000, //1시간
-    enabled: !!area, // selectedArea가 존재할 때만 실행
+    enabled: !!area, // area가 null이 아닌 값이 경우 실행
   });
 };
