@@ -1,9 +1,9 @@
-import Error from '@/components/common/Error';
-import Loading from '@/components/common/Loading';
-import DetailModal from '@/components/modal/detail-modal';
-import { STORE_CONSTANT } from '@/constants/store-constant';
-import { useGetBookmarks } from '@/lib/queries/GetBookmarks';
-import useAuthStore from '@/store/zustand/authStore';
+import Error from '@components/common/Error';
+import Loading from '@components/common/Loading';
+import DetailModal from '@components/modal/detail-modal';
+import { STORE_CONSTANT } from '@constants/store-constant';
+import { useGetBookmarks } from '@lib/queries/GetBookmarks';
+import useAuthStore from '@store/zustand/authStore';
 import { useState } from 'react';
 const BookMark = () => {
   const { data: bookmarkList = [], isPending, isError } = useGetBookmarks();

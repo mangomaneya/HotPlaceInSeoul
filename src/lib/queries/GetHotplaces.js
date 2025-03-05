@@ -1,6 +1,6 @@
-import { QUERY_KEYS } from '@/constants/query-keys';
-import supabase from '@/lib/api/supabaseAPI';
-import useAreaStore from '@/store/zustand/useAreaStore';
+import { QUERY_KEYS } from '@constants/query-keys';
+import supabase from '@lib/api/supabaseAPI';
+import useAreaStore from '@store/zustand/useAreaStore';
 import { useQuery } from '@tanstack/react-query';
 export const useGetHotplaces = ({ area = null } = {}) => {
   const { HOTPLACE } = QUERY_KEYS;

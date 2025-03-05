@@ -1,6 +1,6 @@
-import useAuthStore from '@/store/zustand/authStore';
+import useAuthStore from '@store/zustand/authStore';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { PATH } from '@/constants/path-constant';
+import { PATH } from '@constants/path-constant';
 const { LOGIN } = PATH;
 
 function ProtectedRouter() {

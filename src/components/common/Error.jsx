@@ -1,5 +1,5 @@
-import { ALERT_TYPE } from '@/constants/alert-constant';
-import { openAlert } from '@/lib/utils/openAlert';
+import { ALERT_TYPE } from '@constants/alert-constant';
+import { openAlert } from '@lib/utils/openAlert';
 import { useEffect } from 'react';
 import { BiSolidError } from 'react-icons/bi';
 const { ERROR } = ALERT_TYPE;

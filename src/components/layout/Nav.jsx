@@ -1,6 +1,6 @@
-import { PATH } from '@/constants/path-constant';
+import { PATH } from '@constants/path-constant';
 import useLogout from '@lib/hooks/useLogout';
-import useAuthStore from '@/store/zustand/authStore';
+import useAuthStore from '@store/zustand/authStore';
 import { Link } from 'react-router-dom';
 const { LOGIN, SIGN_UP, BOOK_MARK } = PATH;
 
