@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import Nav from './Nav';
-import { PATH } from '@/constants/path-constant';
+import Nav from '@components/layout/Nav';
+import { PATH } from '@constants/path-constant';
 
 const { HOME } = PATH;
 
