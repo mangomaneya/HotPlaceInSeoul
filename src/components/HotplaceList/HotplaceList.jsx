@@ -27,9 +27,7 @@ const HotplaceList = () => {
   function closeModal() {
     setSelectedPost(null);
   }
-
   document.body.style.overflow = isVisible ? 'hidden' : 'auto';
-
   return (
     <article className='m-3 w-[250px] overflow-y-auto h-[80vh]'>
       {isVisible && (
@@ -62,5 +60,4 @@ const HotplaceList = () => {
     </article>
   );
 };
-
 export default HotplaceList;

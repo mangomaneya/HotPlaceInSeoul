@@ -11,6 +11,7 @@ import { IoCloseOutline } from 'react-icons/io5';
 import Error from '../common/Error';
 import Loading from '../common/Loading';
 import { useMemo } from 'react';
+import useAuthStore from '@/store/zustand/authStore';
 const { WARNING } = ALERT_TYPE;
 const { STORE_NAME, STORE_ADDRESS, STORE_CONTACT, STORE_PIC, BUSINESS_HOUR, CATEGORY } = STORE_CONSTANT;
 
@@ -36,13 +37,18 @@ const DETAIL_LIST = [
   },
 ];
 
-export default function DetailModal({ id: storeId, closeModal }) {
+export default function DetailModal({ id: storeId, setOpenModal }) {
+    const {
+    userData: { token },
+  } = useAuthStore();
   const { bookmarkData, isError: bookmarkError, isPending: isBookmarkPending, error } = useBookmarkQuey({ storeId });
-  const { data: detailData } = useGetHotplaces();
   const { addMutate, deleteMutate, isMutatePending, error: mutateError } = useBookmarkMutation({ storeId });
+
+  const { data: detailData } = useGetHotplaces();
+
   const isBookMarked = bookmarkData?.length > 0;
   const storeData = useMemo(() => detailData.filter(({ id }) => id === storeId)[0], [detailData, storeId]);
-  const isError = bookmarkError || mutateError || storeData.length === 0;
+  const isError = bookmarkError || mutateError || storeData?.length === 0;
   const isPending = isBookmarkPending || isMutatePending;
 
   const handleBookmark = () => {
@@ -57,6 +63,14 @@ export default function DetailModal({ id: storeId, closeModal }) {
     }
   };
 
+  const openYoutubeModal = () => {
+    setOpenModal({ youtube: true, detail: false });
+  };
+
+  const closeDetailModal = () => {
+    setOpenModal({ detail: false, youtube: false });
+  };
+
   if (isPending) return <Loading />;
   if (isError) return <Error isOpenErrorAlert={true} errorMessage={isError ? error.message : mutateError} />;
 
@@ -69,14 +83,16 @@ export default function DetailModal({ id: storeId, closeModal }) {
           className='object-cover w-full max-h-[400px] rounded-lg'
         />
       </p>
-      <span className='absolute text-2xl cursor-pointer text-text-primary top-2 right-2' onClick={closeModal}>
+      <span className='text-text-primary absolute top-2 right-2 text-2xl cursor-pointer' onClick={closeDetailModal}>
         <IoCloseOutline />
       </span>
       <div className='flexCenter !justify-between  mb-[10px]'>
         <h4 className='text-2xl font-bold sm:text-3xl text-accent-active'>{storeData[STORE_NAME]}</h4>
-        <span className='text-2xl cursor-pointer' onClick={handleBookmark}>
-          {isBookMarked ? <FaBookmark className='text-accent' /> : <FaRegBookmark className='text-accent' />}
-        </span>
+        {!!token && (
+          <span className='text-2xl cursor-pointer' onClick={handleBookmark}>
+            {isBookMarked ? <FaBookmark className='text-accent' /> : <FaRegBookmark className='text-accent' />}
+          </span>
+        )}
       </div>
 
       <dl className='flex flex-wrap mb-[20px] '>
@@ -87,8 +103,8 @@ export default function DetailModal({ id: storeId, closeModal }) {
           </React.Fragment>
         ))}
       </dl>
-      <button className='modalBtn'>
-        <FaYoutube className='w-full text-4xl text-white' />
+      <button className='modalBtn' onClick={openYoutubeModal}>
+        <FaYoutube className='text-4xl w-full text-white' />
       </button>
     </section>
   );
