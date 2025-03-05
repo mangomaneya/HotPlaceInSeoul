@@ -17,7 +17,7 @@ export const useGetHotplaces = ({ area = null } = {}) => {
   };
 
   return useQuery({
-    queryKey: area ? [HOTPLACE, area] : [HOTPLACE], // area가 없는 전체값은 HOTPLACE로 캐싱
+    queryKey: [HOTPLACE, selectedArea || 'default'], //selectedArea가 null 일 때는 default로 캐싱
     queryFn: getHotplaces,
     select: filterArea, // 가공한 값을 전달
     staleTime: 60 * 60 * 1000, //1시간
