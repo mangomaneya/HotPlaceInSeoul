@@ -1,17 +1,17 @@
-import { ALERT_TYPE } from '@/constants/alert-constant';
-import { STORE_CONSTANT } from '@/constants/store-constant';
-import { useBookmarkMutation } from '@/lib/mutation/useBookmarkMutation';
-import { useGetHotplaces } from '@/lib/queries/GetHotplaces';
-import { useBookmarkQuey } from '@/lib/queries/useBookmarkQuery';
-import { openAlert } from '@/lib/utils/openAlert';
+import { ALERT_TYPE } from '@constants/alert-constant';
+import { STORE_CONSTANT } from '@constants/store-constant';
+import { useBookmarkMutation } from '@lib/mutation/useBookmarkMutation';
+import { useGetHotplaces } from '@lib/queries/GetHotplaces';
+import { useBookmarkQuey } from '@lib/queries/useBookmarkQuery';
+import { openAlert } from '@lib/utils/openAlert';
 import React from 'react';
 import { FaBookmark } from 'react-icons/fa';
 import { FaRegBookmark, FaYoutube } from 'react-icons/fa6';
 import { IoCloseOutline } from 'react-icons/io5';
-import Error from '../common/Error';
-import Loading from '../common/Loading';
+import Error from '@components/common/Error';
+import Loading from '@components/common/Loading';
 import { useMemo } from 'react';
-import useAuthStore from '@/store/zustand/authStore';
+import useAuthStore from '@store/zustand/authStore';
 const { WARNING } = ALERT_TYPE;
 const { STORE_NAME, STORE_ADDRESS, STORE_CONTACT, STORE_PIC, BUSINESS_HOUR, CATEGORY } = STORE_CONSTANT;
 
@@ -38,7 +38,7 @@ const DETAIL_LIST = [
 ];
 
 export default function DetailModal({ id: storeId, setOpenModal }) {
-    const {
+  const {
     userData: { token },
   } = useAuthStore();
   const { bookmarkData, isError: bookmarkError, isPending: isBookmarkPending, error } = useBookmarkQuey({ storeId });

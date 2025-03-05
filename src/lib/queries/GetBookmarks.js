@@ -1,5 +1,5 @@
-import useAuthStore from '@/store/zustand/authStore';
-import supabase from '@api/supabaseAPI';
+import useAuthStore from '@store/zustand/authStore';
+import supabase from '@lib/api/supabaseAPI';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetBookmarks = () => {

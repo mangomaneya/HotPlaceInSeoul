@@ -1,5 +1,5 @@
-import { QUERY_KEYS } from '@/constants/query-keys';
-import supabase from './supabaseAPI';
+import { QUERY_KEYS } from '@constants/query-keys';
+import supabase from '@lib/api/supabaseAPI';
 const { BOOKMARKS } = QUERY_KEYS;
 export const reqUserBookmark = async (params) => {
   const { storeId, userId } = params;

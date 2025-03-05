@@ -1,4 +1,4 @@
-import useSignUp from '@hooks/useSignUp';
+import useSignUp from '@lib/hooks/useSignUp';
 import InputForm from '@components/common/InputForm';
 
 function FormField({ children }) {

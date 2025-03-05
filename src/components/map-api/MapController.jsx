@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import useAreaStore from '@/store/zustand/useAreaStore';
+import useAreaStore from '@store/zustand/useAreaStore';
 export default function MapController() {
   const [coordinate, setCoordinate] = useState('');
   const { setSelectedArea, setMapCenter } = useAreaStore();
@@ -12,7 +12,6 @@ export default function MapController() {
 
   const handleSelect = (e) => {
     const area = e.target.value;
-    console.log(area);
     setCoordinate(area);
 
     if (locationCoords[area]) {

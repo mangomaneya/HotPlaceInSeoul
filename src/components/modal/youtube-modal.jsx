@@ -1,11 +1,11 @@
-import { useYoutubeQuery } from '@/lib/queries/useYoutubeQuery';
-import { formatDateFromISO } from '@/lib/utils/formatDate';
-import Loading from '../common/Loading';
-import Error from '../common/Error';
-import { openAlert } from '@/lib/utils/openAlert';
-import { ALERT_TYPE } from '@/constants/alert-constant';
-import { useGetHotplaces } from '@/lib/queries/GetHotplaces';
-import { STORE_CONSTANT } from '@/constants/store-constant';
+import { useYoutubeQuery } from '@lib/queries/useYoutubeQuery';
+import { formatDateFromISO } from '@lib/utils/formatDate';
+import Loading from '@components/common/Loading';
+import Error from '@components/common/Error';
+import { openAlert } from '@lib/utils/openAlert';
+import { ALERT_TYPE } from '@constants/alert-constant';
+import { useGetHotplaces } from '@lib/queries/GetHotplaces';
+import { STORE_CONSTANT } from '@constants/store-constant';
 const { ERROR } = ALERT_TYPE;
 const { STORE_NAME, AREA } = STORE_CONSTANT;
 

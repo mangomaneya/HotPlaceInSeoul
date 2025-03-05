@@ -1,4 +1,4 @@
-import { QUERY_KEYS } from '@/constants/query-keys';
+import { QUERY_KEYS } from '@constants/query-keys';
 import { useQuery } from '@tanstack/react-query';
 const { YOUTUBE } = QUERY_KEYS;
 const YOUTUBE_BASE_URL = 'https://www.googleapis.com/youtube/v3/search';

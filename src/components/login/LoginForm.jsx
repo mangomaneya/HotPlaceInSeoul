@@ -1,4 +1,4 @@
-import useLogin from '@hooks/useLogin';
+import useLogin from '@lib/hooks/useLogin';
 import InputForm from '@components/common/InputForm';
 
 const LoginForm = () => {

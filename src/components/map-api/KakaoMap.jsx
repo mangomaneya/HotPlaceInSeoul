@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import supabase from '../../lib/api/supabaseAPI';
-import MapController from './MapController';
-import { openAlert } from '@/lib/utils/openAlert';
-import { ALERT_TYPE } from '@/constants/alert-constant';
-import useAreaStore from '@/store/zustand/useAreaStore';
-import DetailModal from '@/components/modal/detail-modal';
-import YoutubeModal from '@/components/modal/youtube-modal';
+import supabase from '@lib/api/supabaseAPI';
+import MapController from '@components/map-api/MapController';
+import { openAlert } from '@lib/utils/openAlert';
+import { ALERT_TYPE } from '@constants/alert-constant';
+import useAreaStore from '@store/zustand/useAreaStore';
+import DetailModal from '@components/modal/detail-modal';
+import YoutubeModal from '@components/modal/youtube-modal';
 const { ERROR } = ALERT_TYPE;
 
 function KakaoMap() {
