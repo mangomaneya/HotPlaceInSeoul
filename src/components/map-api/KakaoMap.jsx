@@ -16,6 +16,7 @@ function KakaoMap() {
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [dataLoading, setDataLoading] = useState(true);
   const [openModal, setOpenModal] = useState({ detail: false, youtube: false });
+  //모달창을 위한 상태
 
   const [activeMarkerId, setActiveMarkerId] = useState(null);
   const markersRef = useRef({}); //마커 토글 상태
