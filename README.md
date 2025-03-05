@@ -69,12 +69,12 @@
 ###
 
 <div align="center">
-  <img height="300" src="https://s8.ezgif.com/tmp/ezgif-891953af4d8192.gif"  />
+  <img height="300" src="https://github.com/user-attachments/assets/c6c0d5b2-6559-48ca-8f49-eb7bc685b04f"  />
 </div>
 
 ###
 
-<p align="left">해당 장소에 대한 Youtube 영상을 보세요! (아직 녹화 X)</p>
+<p align="left">해당 장소에 대한 Youtube 영상을 보세요!</p>
 
 ###
 
