@@ -5,8 +5,10 @@ import { useQuery } from '@tanstack/react-query';
 export const useGetHotplaces = ({ area = null } = {}) => {
   const { HOTPLACE } = QUERY_KEYS;
   const selectedArea = useAreaStore((state) => state.selectedArea);
+  let query = supabase.from(HOTPLACE).select('*');
+  if (area) query.eq('area', area);
   const getHotplaces = async () => {
-    const { data, error } = await supabase.from(HOTPLACE).select('*').eq('area', area); // area:현재 지역
+    const { data, error } = await query; // area:현재 지역
     if (error) {
       throw new Error(error.message);
     }
