@@ -6,5 +6,4 @@ const useAreaStore = create((set) => ({
   setSelectedArea: (area) => set({ selectedArea: area }),
   setMapCenter: (lat, lon) => set({ mapCenter: { lat, lon } }), // 지도 중심 변경 함수
 }));
-
 export default useAreaStore;
