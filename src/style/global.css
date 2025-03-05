@@ -12,7 +12,7 @@ body {
 }
 
 .fixedCenter {
-  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-auto;
+  @apply fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-auto;
 }
 .modal {
   @apply bg-[rgb(246,245,245)] w-[40%] max-w-[650px] min-w-[300px] min-h-[50dvh] max-h-[85dvh] px-8 py-10 rounded-lg shadow-xl border border-slate-200 z-[1000];
