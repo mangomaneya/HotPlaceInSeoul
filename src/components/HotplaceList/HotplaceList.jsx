@@ -33,9 +33,6 @@ const HotplaceList = () => {
     return <Error />;
   }
 
-  function closeModal() {
-    setSelectedPost(null);
-  }
   document.body.style.overflow = isVisible ? 'hidden' : 'auto';
   return (
     <article className='m-3 w-[250px] overflow-y-auto h-[80vh]'>
