@@ -7,7 +7,7 @@ export const useBookmarkQuey = ({ storeId }) => {
   const {
     userData: { userId },
   } = useAuthStore();
-  console.log('u', userId);
+
   const getUserBookmark = async () => {
     if (!userId) return [];
     const data = reqUserBookmark({ userId, storeId });

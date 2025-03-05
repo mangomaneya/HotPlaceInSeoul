@@ -48,8 +48,11 @@ const BookMark = () => {
       ) : (
         <div className='grid place-items-center mt-[120px] grid-cols-1 sm:grid-cols-2 xl:grid-cols-4'>
           {bookmarkList.map((data) => (
-            <div key={data.id} onClick={() => handleOpenModal(data.place_id)} className='flexCenter mb-[20px]'>
-              <section className='relative m-3 w-[280px] bg-neutral-50 rounded-lg pb-3 cursor-pointer shadow-lg hover:-translate-y-3 transition-transform duration-300 ease-in-out'>
+            <div key={data.id} className='flexCenter mb-[20px]'>
+              <section
+                onClick={() => handleOpenModal(data.place_id)}
+                className='relative m-3 w-[280px] bg-neutral-50 rounded-lg pb-3 cursor-pointer shadow-lg hover:-translate-y-3 transition-transform duration-300 ease-in-out'
+              >
                 <img
                   src={data.hotplaces[STORE_CONSTANT.STORE_PIC]}
                   className='bg-neutral-400 h-[300px] w-[280px] rounded-t-lg'

@@ -46,10 +46,8 @@ export default function DetailModal({ id: storeId, setOpenModal }) {
 
   const { data: detailData } = useGetHotplaces();
 
-  console.log('?', detailData);
-
   const isBookMarked = bookmarkData?.length > 0;
-  const storeData = useMemo(() => detailData.filter(({ id }) => id === storeId)[0], [detailData, storeId]);
+  const storeData = detailData?.filter(({ id }) => id === storeId)[0];
   const isError = bookmarkError || mutateError || storeData?.length === 0;
   const isPending = isBookmarkPending || isMutatePending;
 
