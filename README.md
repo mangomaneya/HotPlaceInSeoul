@@ -110,7 +110,7 @@
 
 #### **Frontend** <br/>
 
-&emsp; <img src="https://img.shields.io/badge/React_18.3.1-087ea4?style=for-the-badge&logo=React&logoColor=white" alt="React"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=JavaScript&logoColor=000" alt="TypeScript"/> <img src="https://img.shields.io/badge/pnpm_10.3.0-F69220?style=for-the-badge&logo=pnpm&logoColor=fff" alt="PNPM" /> <img src="https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="styled-component"/>
+&emsp; <img src="https://img.shields.io/badge/React_18.3.1-087ea4?style=for-the-badge&logo=React&logoColor=white" alt="React"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=JavaScript&logoColor=000" alt="TypeScript"/> <img src="https://img.shields.io/badge/pnpm_10.3.0-F69220?style=for-the-badge&logo=pnpm&logoColor=fff" alt="PNPM" /> <img src="https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="styled-component"/> <img src="https://img.shields.io/badge/zustand-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="Zustand"/> <img src="https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white" alt="React Query"/>
 
 
 ###
