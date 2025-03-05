@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useGetHotplaces } from '@/lib/queries/GetHotplaces';
-import { useState } from 'react';
 import DetailModal from '@/components/modal/detail-modal';
 import YoutubeModal from '@/components/modal/youtube-modal';
 import { STORE_CONSTANT } from '@/constants/store-constant';
